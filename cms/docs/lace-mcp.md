@@ -1,0 +1,153 @@
+# Optional content assistant
+
+MCP is disabled by default. Apply the release's checked-in database migrations,
+then set `LACE_MCP_ENABLED=true` in the Node API environment or Worker vars and
+restart/redeploy. Local Worker development uses `worker/.dev.vars`. No new
+Cloudflare binding is needed. Other values except `false` are rejected.
+
+Use the canonical API origin configured by `LACE_PUBLIC_BASE_URL`, with HTTPS
+in production. Connect a Streamable HTTP OAuth client to `/mcp`. Discovery is
+available at `/.well-known/oauth-protected-resource/mcp` and
+`/.well-known/oauth-authorization-server/api/auth`. Public clients register at
+`/api/auth/oauth2/register` and use authorization code with S256 PKCE.
+
+Sign in with the existing Lace account and explicitly approve read access or
+draft editing or publishing. Read is the default; only administrators can grant
+`content:publish` (which includes read and write). Model discovery, list, get,
+create, save draft and `publish_entry` are available according to the grant.
+Unpublishing, deletion and media administration remain unavailable, including
+for administrators. The current role still applies; demotion removes publication
+on the next request. Published content reaches the site with the next build.
+
+Manage your own connections under Account. Access tokens expire within fifteen
+minutes. Refresh requires `offline_access`, rotates on use and expires within
+thirty days of the grant. Replaying a consumed refresh token revokes its family;
+reconnect after a lost refresh response. Account disable, password reset,
+sign-out-everywhere and revoke-others invalidate delegated authority. Ordinary
+browser sign-out leaves independent connections intact.
+
+After an uncertain create/save result, re-read content. Do not automatically
+create another entry or overwrite a draft using a newly loaded revision.
+
+Set `LACE_MCP_ENABLED=false` to disable discovery, issuance, refresh and MCP use.
+Keep the additive migrations and stored connection records. Re-enabling does
+not reactivate revoked authority. Local test evidence is separate from acceptance
+of your actual Node/Cloudflare deployment.
+
+## Inspect configuration and connect Codex
+
+Admin **Settings → MCP** always shows the server-confirmed Enabled/Disabled
+configuration and canonical endpoint, including while MCP is disabled. Refresh
+status reloads it; a failed refresh labels the last values as stale. Enabled
+means the deployment enables MCP, not that an external client has connected.
+The section offers endpoint copying, Codex CLI/TOML, Claude Code and Gemini CLI
+examples, and generic Streamable HTTP/OAuth guidance. Read only is selected by default; draft editing
+adds write scope; Publishing adds write and publish. **Account** lists and revokes your own connections when enabled.
+
+For the default local endpoint, run on the computer running Codex:
+
+```sh
+codex mcp add lace --url 'http://127.0.0.1:3000/mcp'
+codex mcp login lace --oauth-client-registration dcr --scopes content:read,offline_access
+```
+
+To request draft editing, use:
+
+```sh
+codex mcp login lace --oauth-client-registration dcr --scopes content:read,content:write,offline_access
+```
+
+An alternative configuration in `~/.codex/config.toml` is:
+
+```toml
+[mcp_servers.lace]
+url = "http://127.0.0.1:3000/mcp"
+scopes = ["content:read", "offline_access"]
+```
+
+Then run the OAuth login command above. Use your Settings endpoint instead of
+the example if your origin or port differs. If `lace` is already configured,
+update that entry instead of adding a duplicate. Sign in through the browser,
+approve consent, and restart/reload your client to pick up configuration.
+Selecting different scopes in Settings grants nothing by itself; an existing
+connection needs new consent for additional write or publish authority. To replace a connection, revoke it in
+Account and repeat OAuth login. Viewers cannot grant write access. Only administrators can grant publishing.
+Unpublishing and deletion remain unavailable. This guidance does not establish
+acceptance of any particular external client release.
+
+### Claude Code
+
+For read-only access, run in your terminal:
+
+```sh
+claude mcp add-json --scope user lace '{"type":"http","url":"http://127.0.0.1:3000/mcp","oauth":{"scopes":"content:read offline_access"}}'
+```
+
+`--scope user` selects user-level client configuration, not Lace permissions.
+Inside Claude Code, run `/mcp`, select `lace`, and authenticate with your Lace
+account in the browser. For draft editing, use
+`"scopes":"content:read content:write offline_access"` in the server definition
+and authenticate again for new write consent. If `lace` already exists, update
+its configuration rather than running add-json again. Keep unrelated settings.
+See [Claude Code's official MCP guide](https://code.claude.com/docs/en/mcp).
+
+### Gemini CLI
+
+Merge the following read-only entry into `~/.gemini/settings.json`, preserving
+other settings and updating an existing `lace` entry instead of duplicating it:
+
+```json
+{
+  "mcpServers": {
+    "lace": {
+      "httpUrl": "http://127.0.0.1:3000/mcp",
+      "oauth": {
+        "enabled": true,
+        "scopes": ["content:read", "offline_access"]
+      }
+    }
+  }
+}
+```
+
+Inside an interactive Gemini CLI session, run `/mcp auth lace` and approve
+browser sign-in with your Lace account. This is separate from signing in to the
+CLI's model provider. For draft editing, add `"content:write"` to the scopes
+array and authenticate again. Gemini uses an array of scopes; Claude Code uses
+a space-separated string. Both use discovery and public-client registration;
+no client secret or manual bearer token is needed. Replace the sample endpoint
+with the canonical URL in Settings and restart/reload your client after changes.
+These recipes follow the [official Gemini CLI MCP guide](https://geminicli.com/docs/tools/mcp-server/);
+they do not describe the consumer Gemini web app or claim a verified client login.
+Lace role limits, explicit consent and the unpublish/delete ban still apply.
+
+## Publishing and reconnecting
+
+Choose Publishing in Settings. Use these scopes in the selected client recipe:
+
+```sh
+codex mcp login lace --oauth-client-registration dcr --scopes content:read,content:write,content:publish,offline_access
+```
+
+```toml
+[mcp_servers.lace]
+url = "http://127.0.0.1:3000/mcp"
+scopes = ["content:read", "content:write", "content:publish", "offline_access"]
+```
+
+Claude Code's OAuth string is `"scopes":"content:read content:write content:publish offline_access"`.
+Gemini CLI's OAuth array is `"scopes":["content:read","content:write","content:publish","offline_access"]`.
+Keep the canonical endpoint from Settings and merge existing configuration.
+Re-authorize explicitly as an administrator. Existing grants and refresh tokens
+never gain publication automatically; HTTP 403 `insufficient_scope` naming
+`content:publish` means new consent is needed. No new database migration.
+
+`publish_entry` takes `entryId`, required `expectedRevision` and optional
+`idempotencyKey` with the REST header syntax. It publishes the stored draft through
+the same validation, revision, route and internal-link guards. Keep the same key,
+entry and revision when retrying an uncertain response. The shared REST-shaped
+result is `{entry, publication, build}`; replay reports `replayed` and a
+`not-dispatched` build without a second publication. Builds coalesce and content
+reaches the site on the next build. Unpublish and delete remain forbidden.
+A leaked publish-scoped token can change public content; review and revoke
+connections under Account.

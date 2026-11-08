@@ -8,9 +8,24 @@ importers:
 
   .:
     dependencies:
+      '@lacecms/astro':
+        specifier: 0.1.0-rc2
+        version: 0.1.0-rc2(astro@7.4.7(yaml@2.9.1))
+      '@lacecms/content':
+        specifier: 0.1.0-rc2
+        version: 0.1.0-rc2
+      '@lacecms/render':
+        specifier: 0.1.0-rc2
+        version: 0.1.0-rc2
+      '@lacecms/sdk':
+        specifier: 0.1.0-rc2
+        version: 0.1.0-rc2
       astro:
         specifier: ^7.4.7
         version: 7.4.7(yaml@2.9.1)
+      sharp:
+        specifier: 0.35.5
+        version: 0.35.5
 
 packages:
 
@@ -378,6 +393,32 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.6.0':
     resolution: {integrity: sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==}
+
+  '@lacecms/astro@0.1.0-rc2':
+    resolution: {integrity: sha512-9Uncfzt7RMhM1gx0wFapq4r0wULFOI0tIUduw7xNlyQiGLPQUZQDHlASN+6r/ZSZmFtffW/mWkJgxKA/KnAq7g==}
+    engines: {node: '>=24.12.0'}
+    peerDependencies:
+      astro: ^7.3.1
+
+  '@lacecms/content@0.1.0-rc2':
+    resolution: {integrity: sha512-gho7q6gjwonHzs4NOtXgxSxw5ouJyHyWXOddhBE2uYdDQv/O4EYAi4qcopl/65DNwR6iGPLWGi8zgcGgtSfG5Q==}
+    engines: {node: '>=24.12.0'}
+
+  '@lacecms/contracts@0.1.0-rc2':
+    resolution: {integrity: sha512-S9WFIasJjvNx0ep05R3U07JTcHTXWQAMPwXFlgyxi2ECWkVeULXAx6W/NUuLr8mFzrOs6oJperj+OCxKMSL8tA==}
+    engines: {node: '>=24.12.0'}
+
+  '@lacecms/domain@0.1.0-rc2':
+    resolution: {integrity: sha512-Ur0ktPROPWXx5INdinpOL6+69YOusS5V3PRz0C16HQxejG7GE60nGPmBsaCVRoMrkEdvTEdbqpX7JKa6qQNQOg==}
+    engines: {node: '>=24.12.0'}
+
+  '@lacecms/render@0.1.0-rc2':
+    resolution: {integrity: sha512-fka1yMD9GPPZKzRonL9bE2LEc5t2fkWpjPEPz7N33ZgZdvevLH4frUCQ5vz1vannEACHcU2HPkxSBv0lm7XZYw==}
+    engines: {node: '>=24.12.0'}
+
+  '@lacecms/sdk@0.1.0-rc2':
+    resolution: {integrity: sha512-xBlbAa7xdF/eDuExu9T9VUBYECNiedGS+pKrRUviRkVqWAl90Zu/h3/j4WjC7LIwKwT4uXyvUV1Mp45uuyg4Xw==}
+    engines: {node: '>=24.12.0'}
 
   '@napi-rs/wasm-runtime@1.2.6':
     resolution: {integrity: sha512-mRyDmEw9/fCDXCGfL1sbgIw/GUK0PVxRW4YwgPN61F3LQ+fSyoBFarJVzgGyhF6kRzEQZ0FejDqm4WLXSeqQmw==}
@@ -1274,6 +1315,14 @@ packages:
       uploadthing:
         optional: true
 
+  valibot@1.4.2:
+    resolution: {integrity: sha512-gjdCvJ6d3RyHAneqxMYMW9QMCwYMb3jpOO0IyHZV1bnRHFBHrX3VkIILt5XYR0WhwHiH7Mty8ovuPZ/O3gamrg==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   verkit@0.5.0:
     resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
     engines: {node: '>=18.12.0'}
@@ -1553,8 +1602,7 @@ snapshots:
       tslib: 2.9.1
     optional: true
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.35.5':
     optionalDependencies:
@@ -1661,6 +1709,47 @@ snapshots:
     optional: true
 
   '@jridgewell/sourcemap-codec@1.6.0': {}
+
+  '@lacecms/astro@0.1.0-rc2(astro@7.4.7(yaml@2.9.1))':
+    dependencies:
+      '@lacecms/render': 0.1.0-rc2
+      '@lacecms/sdk': 0.1.0-rc2
+      astro: 7.4.7(yaml@2.9.1)
+    transitivePeerDependencies:
+      - typescript
+
+  '@lacecms/content@0.1.0-rc2':
+    dependencies:
+      valibot: 1.4.2
+    transitivePeerDependencies:
+      - typescript
+
+  '@lacecms/contracts@0.1.0-rc2':
+    dependencies:
+      '@lacecms/content': 0.1.0-rc2
+      '@lacecms/domain': 0.1.0-rc2
+      valibot: 1.4.2
+    transitivePeerDependencies:
+      - typescript
+
+  '@lacecms/domain@0.1.0-rc2':
+    dependencies:
+      '@lacecms/content': 0.1.0-rc2
+    transitivePeerDependencies:
+      - typescript
+
+  '@lacecms/render@0.1.0-rc2':
+    dependencies:
+      '@lacecms/content': 0.1.0-rc2
+    transitivePeerDependencies:
+      - typescript
+
+  '@lacecms/sdk@0.1.0-rc2':
+    dependencies:
+      '@lacecms/contracts': 0.1.0-rc2
+      valibot: 1.4.2
+    transitivePeerDependencies:
+      - typescript
 
   '@napi-rs/wasm-runtime@1.2.6(@emnapi/core@2.0.0-beta.2)(@emnapi/runtime@2.0.0-beta.2)':
     dependencies:
@@ -2378,8 +2467,7 @@ snapshots:
 
   sax@1.6.1: {}
 
-  semver@7.8.6:
-    optional: true
+  semver@7.8.6: {}
 
   sharp@0.35.5:
     dependencies:
@@ -2412,7 +2500,6 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.5
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
-    optional: true
 
   shiki@4.6.0:
     dependencies:
@@ -2528,6 +2615,8 @@ snapshots:
       node-fetch-native: 1.6.7
       ofetch: 1.5.1
       ufo: 1.6.4
+
+  valibot@1.4.2: {}
 
   verkit@0.5.0: {}
 

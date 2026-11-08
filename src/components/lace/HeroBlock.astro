@@ -1,0 +1,20 @@
+---
+import LaceImage from "@lacecms/astro/LaceImage.astro";
+import RichText from "@lacecms/astro/RichText.astro";
+import type { builtInBlocks } from "@lacecms/content";
+import type { BlockProps } from "@lacecms/render";
+
+type Props = BlockProps<typeof builtInBlocks.hero>;
+
+const { anchor, block, className, context, data, image, link } = Astro.props;
+const action = link(data.primaryActionUrl);
+const media = data.image === undefined ? undefined : image(data.image);
+---
+
+<section class:list={["hero", className]} data-lace-block={block.type} data-lace-block-key={block.key} id={anchor}>
+  {data.eyebrow !== undefined && <p data-lace-part="eyebrow">{data.eyebrow}</p>}
+  <h1 data-lace-part="heading">{data.heading}</h1>
+  {data.body !== undefined && <div data-lace-part="body"><RichText context={{ block: context, fieldPath: ["body"] }} document={data.body} /></div>}
+  {media !== undefined && <LaceImage data-lace-part="media" image={media} loading="eager" sizes="(min-width: 64rem) 60rem, 100vw" />}
+  {data.primaryActionLabel !== undefined && data.primaryActionUrl !== undefined && (action.state === "resolved" ? <a data-lace-part="action" href={action.href}>{data.primaryActionLabel}</a> : <span data-lace-part="label">{data.primaryActionLabel}</span>)}
+</section>

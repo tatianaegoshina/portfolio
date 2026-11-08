@@ -1,0 +1,11 @@
+---
+import RichText from "@lacecms/astro/RichText.astro";
+import type { builtInBlocks } from "@lacecms/content";
+import type { BlockProps } from "@lacecms/render";
+
+type Props = BlockProps<typeof builtInBlocks.richText>;
+
+const { anchor, block, className, context, data } = Astro.props;
+---
+
+<section class:list={["rich-text", className]} data-lace-block={block.type} data-lace-block-key={block.key} id={anchor}><div data-lace-part="content"><RichText context={{ block: context, fieldPath: ["content"] }} document={data.content} /></div></section>

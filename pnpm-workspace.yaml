@@ -1,0 +1,7 @@
+minimumReleaseAgeExclude:
+  - '@lacecms/astro@0.1.0-rc2'
+  - '@lacecms/content@0.1.0-rc2'
+  - '@lacecms/contracts@0.1.0-rc2'
+  - '@lacecms/domain@0.1.0-rc2'
+  - '@lacecms/render@0.1.0-rc2'
+  - '@lacecms/sdk@0.1.0-rc2'

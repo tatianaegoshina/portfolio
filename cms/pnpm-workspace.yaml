@@ -1,0 +1,17 @@
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - '@lacecms/application@0.1.0-rc2'
+  - '@lacecms/auth@0.1.0-rc2'
+  - '@lacecms/cli@0.1.0-rc2'
+  - '@lacecms/config@0.1.0-rc2'
+  - '@lacecms/content@0.1.0-rc2'
+  - '@lacecms/contracts@0.1.0-rc2'
+  - '@lacecms/db@0.1.0-rc2'
+  - '@lacecms/domain@0.1.0-rc2'
+  - '@lacecms/mcp@0.1.0-rc2'
+  - '@lacecms/platform-cloudflare@0.1.0-rc2'
+  - '@lacecms/platform-node@0.1.0-rc2'
+  - '@lacecms/server@0.1.0-rc2'

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "framework": "astro",
+  "componentsDir": "src/components/lace",
+  "blockMap": "src/lace/blocks.ts",
+  "blockMapSha256": "a5773d59e91fc9dffece1da2b8a72ab4fdfacd567a5d0e524edce7827e6bc38e",
+  "items": {
+    "cta": {
+      "revision": 3,
+      "files": {
+        "src/components/lace/CtaBlock.astro": "3e042ba0e79954cc46c35406db30b5a9c2153c13183aa71d5fd74f4ea776df43"
+      }
+    },
+    "gallery": {
+      "revision": 7,
+      "files": {
+        "src/components/lace/GalleryBlock.astro": "0db9489d64d4e41f3ac78219cbadc2f106e8b3249246f433d88697c4c91fb000",
+        "src/components/lace/GalleryVideo.css": "95c9b2d88f75e22f2e1a722a7eb84898a1bab9a8feabfa0a769185a143b0bff8",
+        "src/components/lace/ListLayout.css": "a8606fc40a51963db63e115646c1466b51727b310aa9f6425ea798fb3ac204fe"
+      }
+    },
+    "hero": {
+      "revision": 5,
+      "files": {
+        "src/components/lace/HeroBlock.astro": "776136821f99b66afa0ff4f67243f32d48beca9c42748c24ed47558bf1f0d9f6"
+      }
+    },
+    "image": {
+      "revision": 7,
+      "files": {
+        "src/components/lace/ImageBlock.astro": "ec64652ed1c9b8608e20225d0edc005c13d52901c3a610bcf2e225ce162e0a30"
+      }
+    },
+    "link": {
+      "revision": 1,
+      "files": {
+        "src/components/lace/LinkBlock.astro": "1998507ffd526760862d4454ea63eb7aef96ddb742de3e941353baca7dda3e60"
+      }
+    },
+    "navigation": {
+      "revision": 2,
+      "files": {
+        "src/components/lace/NavigationBlock.astro": "9020b9365c2194b62071eb6d254c8ab8fe2c125c7348c276c27a4d488abf0374"
+      }
+    },
+    "quote": {
+      "revision": 2,
+      "files": {
+        "src/components/lace/QuoteBlock.astro": "0a8143310c920b0103c08cc28ae1c624f5c69a6390f98e2f097540e7cd8de93f"
+      }
+    },
+    "richText": {
+      "revision": 2,
+      "files": {
+        "src/components/lace/RichTextBlock.astro": "8716b129857ca3dd8e6c144c18d2d140e4d6471f0cb2c5a4544d6e8d9b7a3f38"
+      }
+    },
+    "videoEmbed": {
+      "revision": 2,
+      "files": {
+        "src/components/lace/VideoEmbed.css": "d0ced20f52373325ce006bae34de47cc8b8ee82261f655eba6c4bef57cad0426",
+        "src/components/lace/VideoEmbedBlock.astro": "a5060c874d3d1c9bf9d1c15e94d9f78b8a3667e18b4f90a410017d4eda30408e"
+      }
+    }
+  }
+}
