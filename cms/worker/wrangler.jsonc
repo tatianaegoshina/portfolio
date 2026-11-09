@@ -6,7 +6,7 @@
 // values live in the ignored worker/.dev.vars (pnpm cf:env:prepare).
 {
   "$schema": "../node_modules/wrangler/config-schema.json",
-  "name": "cms-cms",
+  "name": "portfolio-cms",
   "main": "index.ts",
   "compatibility_date": "2026-09-01",
   // Better Auth requires AsyncLocalStorage from the Node.js compatibility layer.
@@ -14,15 +14,15 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "cms-cms",
+      "database_name": "portfolio-cms",
       // Placeholder: run `pnpm exec wrangler d1 create cms-cms` and paste the
       // returned ID here and into LACE_D1_DATABASE_ID in .env. Local state is keyed by it.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "1e798405-389b-4a77-a667-00887e9dd154",
       "migrations_dir": "../node_modules/@lacecms/db/drizzle",
     },
   ],
   // Create with `pnpm exec wrangler r2 bucket create cms-media`.
-  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "cms-media" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "portfolio-media" }],
   // Optional derived cache. Without a CACHE binding the Worker uses a no-op cache.
   // To enable it, create a namespace with `pnpm exec wrangler kv namespace create CACHE`
   // and add: "kv_namespaces": [{ "binding": "CACHE", "id": "<namespace-id>" }],
@@ -44,13 +44,13 @@
   // Optional public API reference: add "LACE_API_DOCS_ENABLED": "true" to vars.
   "vars": {
     // Opt in after migrations; no additional binding is required.
-    "LACE_MCP_ENABLED": "false",
+    "LACE_MCP_ENABLED": "true",
     // The Worker's public origin with a trailing slash: admin login, API and media URLs.
     // Replace before deploying; worker/.dev.vars overrides it for local development.
     "LACE_PUBLIC_BASE_URL": "https://cms.example.com/",
     // Safe build-site identity shown in Admin (not proof of a successful deploy).
-    "LACE_BUILD_SITE_ID": "main-site",
-    "LACE_BUILD_SITE_LABEL": "Main site",
+    "LACE_BUILD_SITE_ID": "my-portfolio",
+    "LACE_BUILD_SITE_LABEL": "My portfolio",
     // Optional public site base URL for "Open on site" links in the editor:
     // "LACE_BUILD_SITE_URL": "https://<pages-project>.pages.dev/",
     // Optional Pages deployment tracking (with the LACE_PAGES_API_TOKEN secret, Pages Read only):
