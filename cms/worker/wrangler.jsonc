@@ -47,7 +47,7 @@
     "LACE_MCP_ENABLED": "true",
     // The Worker's public origin with a trailing slash: admin login, API and media URLs.
     // Replace before deploying; worker/.dev.vars overrides it for local development.
-    "LACE_PUBLIC_BASE_URL": "https://cms.example.com/",
+    "LACE_PUBLIC_BASE_URL": "https://portfolio-cms.tategodi.workers.dev/",
     // Safe build-site identity shown in Admin (not proof of a successful deploy).
     "LACE_BUILD_SITE_ID": "my-portfolio",
     "LACE_BUILD_SITE_LABEL": "My portfolio",
