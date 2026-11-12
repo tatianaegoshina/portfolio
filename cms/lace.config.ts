@@ -4,14 +4,15 @@
 //   /                 page "home"        intro; projects listed by their `order`
 //   /about            page "about"       intro + section headings; rows from "cv"
 //   /projects/:slug   collection "projects"  header row, text, gallery blocks
-//   /cv/:slug         collection "cv"    About rows; the site renders no page
-//                                        for them and leaves them out of the sitemap
+//   (no route)        collection "cv"    About rows without slugs or pages; the
+//                                        site lists them with site.records("cv")
 //   (no route)        global "settings"  site name, footer, accent, SEO defaults
 //   (no route)        global "navigation" header links: about, instagram, email
 //
 // Project media use the built-in `gallery` (install its source with
-// `lace add block gallery`). One project is a sequence of galleries, one per
-// run of rows with the same layout (see README.md).
+// `lace add block gallery`). One `columns-2` gallery holds a whole project:
+// item `placement` puts an image in the left (`start`) or right (`end`)
+// column, or across the row (`full`) for wide videos.
 import { defineCollection, defineConfig, defineGlobal, definePage } from "@lacecms/config";
 import { builtInBlocks, field } from "@lacecms/content";
 
@@ -133,17 +134,16 @@ export default await defineConfig({
       listOptions: {
         sortableFields: ["order", "year"],
         searchableFields: ["summary"],
+        defaultSort: "field:order",
       },
       blocks: ["gallery"],
       seo: { description: "summary" },
     }),
     defineCollection({
       key: "cv",
-      version: 1,
+      version: 2,
       label: "About entries",
-      // A collection needs a route in rc2. The site renders no /cv pages and
-      // filters this model out of the sitemap.
-      route: "/cv/:slug",
+      description: "Rows of the About tables. The row text is the entry title.",
       fields: {
         section: field.select({
           label: "Section",
@@ -197,6 +197,7 @@ export default await defineConfig({
         sortableFields: ["year", "order", "section"],
         filterableFields: ["section"],
         searchableFields: ["organization", "note"],
+        defaultSort: "-field:year",
       },
     }),
     defineGlobal({
