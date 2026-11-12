@@ -1,0 +1,66 @@
+# Run pnpm env:prepare to create a protected .env with fresh local credentials.
+# This template contains no usable credentials. Review local settings afterward.
+# Browser-reachable API origin for authentication and rendered media.
+LACE_PUBLIC_BASE_URL=http://127.0.0.1:3000/
+# Host-side Astro export transport. Compose builder overrides this internally.
+LACE_API_BASE_URL=http://127.0.0.1:3000/
+LACE_DATABASE_PATH=./.lace/data/lace.sqlite
+# Empty trusts only the TCP peer. Set only the CIDRs of your controlled ingress proxies.
+# See docs/lace-compose-production.md for trusted client identity and network isolation.
+LACE_TRUSTED_PROXY_CIDRS=
+# Cloudflare operator target settings (lace ... --target cloudflare-local|cloudflare-remote).
+# LACE_D1_DATABASE_ID must equal the DB database_id in worker/wrangler.jsonc; local
+# simulated state in LACE_CLOUDFLARE_PERSIST_TO is keyed by it and shared with pnpm cf:dev.
+LACE_WRANGLER_CONFIG=worker/wrangler.jsonc
+LACE_CLOUDFLARE_PERSIST_TO=./.lace/data/cloudflare
+LACE_D1_DATABASE_ID=00000000-0000-0000-0000-000000000000
+# Remote credentials belong in .lace/cloudflare-operator.env, loaded explicitly.
+# A plain account ID may select Wrangler; never place the operator token here.
+CLOUDFLARE_ACCOUNT_ID=
+LACE_API_IMAGE=ghcr.io/lacecms/api:0.1.0-rc2
+LACE_BUILDER_IMAGE=ghcr.io/lacecms/builder:0.1.0-rc2
+LACE_AUTH_SECRET=
+LACE_MINIO_ROOT_ACCESS_KEY=
+LACE_MINIO_ROOT_SECRET=
+LACE_MINIO_BUCKET=lace-media
+LACE_MINIO_REGION=us-east-1
+LACE_MINIO_TIMEOUT_MS=5000
+LACE_BUILDER_SECRET=
+# Leave empty until Admin Settings issues a read-only build token.
+LACE_BUILD_TOKEN=
+LACE_API_PORT=3000
+LACE_HTTP_PORT=8080
+# Optional transactional email. Leave LACE_EMAIL_PROVIDER empty to disable it.
+# smtp (STARTTLS or TLS) or resend; check with Admin Settings > Send test email.
+# See docs/lace-operations.md#email-delivery. Never commit passwords or API keys.
+LACE_EMAIL_PROVIDER=
+LACE_EMAIL_FROM=
+LACE_SMTP_HOST=
+LACE_SMTP_PORT=587
+LACE_SMTP_SECURITY=starttls
+LACE_SMTP_USER=
+LACE_SMTP_PASSWORD=
+LACE_RESEND_API_KEY=
+
+# Build source host mount; site/output directories are relative inside the container.
+# The existing Astro site at .. is the installation root and the project.
+LACE_BUILD_SOURCE_ROOT=..
+LACE_BUILD_SITE_DIR=.
+LACE_BUILD_OUTPUT_DIR=dist
+LACE_BUILD_SITE_ID=main-site
+LACE_BUILD_SITE_LABEL="Main site"
+# Optional public site base URL, e.g. https://example.com/. The editor links published
+# entries to it ("Open on site") and site builds use it for canonical URLs, og:url and
+# sitemap.xml; leave it empty to show paths as text and build without a sitemap.
+LACE_BUILD_SITE_URL=
+# Site indexing: empty or on lets search engines index the site; off (staging, previews)
+# marks every page noindex and makes robots.txt disallow everything.
+LACE_SITE_INDEXING=
+
+# Optional public API reference at /api/docs (browser needs jsDelivr access).
+# LACE_API_DOCS_ENABLED=true
+
+# Optional content assistant; apply database migrations before enabling.
+# MCP allows read/create/save-draft; publishing needs separate content:publish consent.
+# Unpublishing and deletion remain unavailable.
+LACE_MCP_ENABLED=false

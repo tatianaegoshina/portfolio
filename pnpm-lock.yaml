@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@lacecms/astro':
-        specifier: 0.1.0-rc2
-        version: 0.1.0-rc2(astro@7.4.7(yaml@2.9.1))
+        specifier: 0.1.0-rc3
+        version: 0.1.0-rc3(astro@7.4.7(yaml@2.9.1))
       '@lacecms/content':
-        specifier: 0.1.0-rc2
-        version: 0.1.0-rc2
+        specifier: 0.1.0-rc3
+        version: 0.1.0-rc3
       '@lacecms/render':
-        specifier: 0.1.0-rc2
-        version: 0.1.0-rc2
+        specifier: 0.1.0-rc3
+        version: 0.1.0-rc3
       '@lacecms/sdk':
-        specifier: 0.1.0-rc2
-        version: 0.1.0-rc2
+        specifier: 0.1.0-rc3
+        version: 0.1.0-rc3
       astro:
         specifier: ^7.4.7
         version: 7.4.7(yaml@2.9.1)
@@ -394,30 +394,30 @@ packages:
   '@jridgewell/sourcemap-codec@1.6.0':
     resolution: {integrity: sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==}
 
-  '@lacecms/astro@0.1.0-rc2':
-    resolution: {integrity: sha512-9Uncfzt7RMhM1gx0wFapq4r0wULFOI0tIUduw7xNlyQiGLPQUZQDHlASN+6r/ZSZmFtffW/mWkJgxKA/KnAq7g==}
+  '@lacecms/astro@0.1.0-rc3':
+    resolution: {integrity: sha512-IcbhAhan5aX97lZTKR8zM+zbi18Yw7OO+XP/l6kCXnqveEFuFJLa0NCNga9J0hqeaTStVcpwpKgoJ+irJL9Q8g==}
     engines: {node: '>=24.12.0'}
     peerDependencies:
       astro: ^7.3.1
 
-  '@lacecms/content@0.1.0-rc2':
-    resolution: {integrity: sha512-gho7q6gjwonHzs4NOtXgxSxw5ouJyHyWXOddhBE2uYdDQv/O4EYAi4qcopl/65DNwR6iGPLWGi8zgcGgtSfG5Q==}
+  '@lacecms/content@0.1.0-rc3':
+    resolution: {integrity: sha512-rHqdL/s/t//rXoNm0badwTE6qAT5EzV8z4yagOXx2H3fwIwydOubVn0p2OrdBpeaVedPMwGGevzWbrZPr0RwOQ==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/contracts@0.1.0-rc2':
-    resolution: {integrity: sha512-S9WFIasJjvNx0ep05R3U07JTcHTXWQAMPwXFlgyxi2ECWkVeULXAx6W/NUuLr8mFzrOs6oJperj+OCxKMSL8tA==}
+  '@lacecms/contracts@0.1.0-rc3':
+    resolution: {integrity: sha512-MDZ5g+xw9vMlImFL+qfMmWrN+8xNup2lccpKjD6TygoJ22KSoY/KK3PLaWtmV/9KG+49UnTDVBzGNV9fJ1G6Uw==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/domain@0.1.0-rc2':
-    resolution: {integrity: sha512-Ur0ktPROPWXx5INdinpOL6+69YOusS5V3PRz0C16HQxejG7GE60nGPmBsaCVRoMrkEdvTEdbqpX7JKa6qQNQOg==}
+  '@lacecms/domain@0.1.0-rc3':
+    resolution: {integrity: sha512-SD+PTUJJ9ZWYZeu/HUsIMaxjfbS07K3hJ+VgWPwXg8lA/WplEoRREnz+YtP9MdDGdA6LMXWgd+k8jbGTfyVKVA==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/render@0.1.0-rc2':
-    resolution: {integrity: sha512-fka1yMD9GPPZKzRonL9bE2LEc5t2fkWpjPEPz7N33ZgZdvevLH4frUCQ5vz1vannEACHcU2HPkxSBv0lm7XZYw==}
+  '@lacecms/render@0.1.0-rc3':
+    resolution: {integrity: sha512-+NqRmDEezaD3bjQXlwtZJDSmLdQiV4BsDT81YxN1CUmzLMD5KZsaiqlAngi5skRf08E5E7v+YqewrFST1W0giQ==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/sdk@0.1.0-rc2':
-    resolution: {integrity: sha512-xBlbAa7xdF/eDuExu9T9VUBYECNiedGS+pKrRUviRkVqWAl90Zu/h3/j4WjC7LIwKwT4uXyvUV1Mp45uuyg4Xw==}
+  '@lacecms/sdk@0.1.0-rc3':
+    resolution: {integrity: sha512-Y4TjQgUZQiDeLnDAXU0eE08pmgQnGI+48+gX+0scAYyAgQnvsFVESN6pRlDTZqYGUxVD63GhPk423LichcjNxw==}
     engines: {node: '>=24.12.0'}
 
   '@napi-rs/wasm-runtime@1.2.6':
@@ -1710,43 +1710,43 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.6.0': {}
 
-  '@lacecms/astro@0.1.0-rc2(astro@7.4.7(yaml@2.9.1))':
+  '@lacecms/astro@0.1.0-rc3(astro@7.4.7(yaml@2.9.1))':
     dependencies:
-      '@lacecms/render': 0.1.0-rc2
-      '@lacecms/sdk': 0.1.0-rc2
+      '@lacecms/render': 0.1.0-rc3
+      '@lacecms/sdk': 0.1.0-rc3
       astro: 7.4.7(yaml@2.9.1)
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/content@0.1.0-rc2':
+  '@lacecms/content@0.1.0-rc3':
     dependencies:
       valibot: 1.4.2
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/contracts@0.1.0-rc2':
+  '@lacecms/contracts@0.1.0-rc3':
     dependencies:
-      '@lacecms/content': 0.1.0-rc2
-      '@lacecms/domain': 0.1.0-rc2
+      '@lacecms/content': 0.1.0-rc3
+      '@lacecms/domain': 0.1.0-rc3
       valibot: 1.4.2
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/domain@0.1.0-rc2':
+  '@lacecms/domain@0.1.0-rc3':
     dependencies:
-      '@lacecms/content': 0.1.0-rc2
+      '@lacecms/content': 0.1.0-rc3
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/render@0.1.0-rc2':
+  '@lacecms/render@0.1.0-rc3':
     dependencies:
-      '@lacecms/content': 0.1.0-rc2
+      '@lacecms/content': 0.1.0-rc3
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/sdk@0.1.0-rc2':
+  '@lacecms/sdk@0.1.0-rc3':
     dependencies:
-      '@lacecms/contracts': 0.1.0-rc2
+      '@lacecms/contracts': 0.1.0-rc3
       valibot: 1.4.2
     transitivePeerDependencies:
       - typescript

@@ -1,4 +1,4 @@
-// Lace 0.1.0-rc2 configuration for tatianae.com (portfolio of Tatiana Egoshina).
+// Lace 0.1.0-rc3 configuration for tatianae.com (portfolio of Tatiana Egoshina).
 //
 // Content map:
 //   /                 page "home"        intro; projects listed by their `order`
@@ -91,7 +91,7 @@ export default await defineConfig({
     }),
     defineCollection({
       key: "projects",
-      version: 1,
+      version: 2,
       label: "Projects",
       route: "/projects/:slug",
       fields: {

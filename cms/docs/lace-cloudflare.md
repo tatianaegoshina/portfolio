@@ -2,6 +2,8 @@
 
 Run the CMS as your own Cloudflare Worker (D1, R2 and the packaged admin): first locally without an account, then in your Cloudflare account through explicit commands.
 
+Cloudflare operator commands require the project's direct Miniflare dependency, pinned to the version used by Wrangler. If upgrading an existing Cloudflare project that lacks it, run `pnpm add miniflare@5.20260903.0-alpha` and install dependencies before running those commands.
+
 **Working directory:** the CMS installation root that contains `package.json`, `lace.config.ts` and `worker/` (for example `cms/`). Run every command from there.
 
 **Two deployments.** The CMS Worker and the static site are separate deployments. Deploying the Worker never publishes the site, and deploying the site never deploys, migrates or configures the Worker.
@@ -13,7 +15,7 @@ Site mode: **existing site** at `..`. The generator did not modify it.
 ## Prerequisites
 
 - Node `>=24.12.0` and pnpm `>=12` (tested baseline: Node `24.12.0`, pnpm `12.3.4`). The project pins Wrangler in `package.json`; always use it through `pnpm exec wrangler`.
-- Lace `0.1.0-rc2` or a later compatible release. The private operator file, `--operator-env`, `lace cloudflare preflight` and Pages deployment tracking are included in this release.
+- Lace `0.1.0-rc3` or a later compatible release. The private operator file, `--operator-env`, `lace cloudflare preflight` and Pages deployment tracking are included in this release.
 - For the account part only: a Cloudflare account with Workers, D1 and R2.
 
 ## Run the Worker locally

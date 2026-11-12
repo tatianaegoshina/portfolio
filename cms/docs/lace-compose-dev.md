@@ -12,7 +12,7 @@ Site mode: **existing site** at `..`. The generator did not modify the site; thi
 
 - Node `>=24.12.0` and pnpm `>=12` (tested baseline: Node `24.12.0`, the project-pinned pnpm `12.3.4`).
 - Docker with Compose and a running daemon. MinIO's first image build needs network access and disk space.
-- Lace `0.1.0-rc2` or a later compatible release of the packages in `package.json` and the API/builder images in `.env.example`.
+- Lace `0.1.0-rc3` or a later compatible release of the packages in `package.json` and the API/builder images in `.env.example`.
 
 ## Install and prepare the environment
 

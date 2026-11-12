@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "templateVersion": "0.48.0",
+  "site": {
+    "mode": "existing",
+    "path": ".."
+  },
+  "files": {
+    ".env.example": {
+      "owner": "managed",
+      "sha256": "95959e995cde47cb2106f8495b973f89b1f8e5ad066115d9013e4cbff1e9d572"
+    },
+    ".github/workflows/cloudflare.yml": {
+      "owner": "managed",
+      "sha256": "e2bbb4f3dcaa00a028986f40f8417b6cb7e5a63d4f8fc14401c6f8c93db43d8b"
+    },
+    ".gitignore": {
+      "owner": "managed",
+      "sha256": "66db9c5a089fa9b739c08f000d1d2898745150da8f3d3770c0e07be0d1712f1a"
+    },
+    "README.md": {
+      "owner": "user"
+    },
+    "deploy/minio.Dockerfile": {
+      "owner": "managed",
+      "sha256": "14ec240a2a063cc7c9ad8a08bcc33089272180274a46ec17b3b711a098060eb0"
+    },
+    "deploy/nginx.conf": {
+      "owner": "managed",
+      "sha256": "3279c17456cc0912afbb2fa63b557d169c7a5862bc7ff4534a27b14a7af5f692"
+    },
+    "docker-compose.yml": {
+      "owner": "managed",
+      "sha256": "1159c56edde50dd648f2e63ed6a4d9b918901051236caf64dccb4e359219a73d"
+    },
+    "docs/cloudflare-operator.env.example": {
+      "owner": "managed",
+      "sha256": "9c7d9f4368411a13c36af4b4e986b48e806a4a9693fffcee6d488f5f1a880530"
+    },
+    "docs/lace-astro-site.md": {
+      "owner": "managed",
+      "sha256": "d1a8c1e1399d0bbf65d3a8d0a39bb5b19a2848084f3cd65e068d5b28a3c8edbc"
+    },
+    "docs/lace-cloudflare.md": {
+      "owner": "managed",
+      "sha256": "aa17853d7115c838a1b96afbdefd7c3ab76b0bd698a17044f24c0068b48e1900"
+    },
+    "docs/lace-compose-dev.md": {
+      "owner": "managed",
+      "sha256": "20844f6d8f681d2a2d2df7fd4a1ad43d0b3995a465a2ba6fbf8992210bff0a2a"
+    },
+    "docs/lace-compose-production.md": {
+      "owner": "managed",
+      "sha256": "6ec3a8983e5e314bddd5f1687c4117e8bade7a72cca03e11b1954c8c21560f05"
+    },
+    "docs/lace-mcp.md": {
+      "owner": "managed",
+      "sha256": "aff4e2ee9ba4d22a796fdd17990a71bc8ca6eeeb77b333aacb3bd0968281ac63"
+    },
+    "docs/lace-operations.md": {
+      "owner": "managed",
+      "sha256": "1938a8812ef00d67a1d3bcdc32bfe76bdb4b80bb3d8506b9c5bade701de9edcf"
+    },
+    "lace.config.ts": {
+      "owner": "user"
+    },
+    "package.json": {
+      "owner": "managed",
+      "sha256": "e4f735e8b5c6040df91db68c17219947b822d27dacb5fe05db8c8e150429c7b7"
+    },
+    "pnpm-workspace.yaml": {
+      "owner": "managed",
+      "sha256": "0231bba7098bf12cba25f86eefc52a66c10c4eb3fab1bbe468731f8064c31bb3"
+    },
+    "worker/.dev.vars.example": {
+      "owner": "managed",
+      "sha256": "94b509386ffeaa9ad97d77a23c4f1e171bc8c30b201e609158cdd7e43815c1e3"
+    },
+    "worker/index.ts": {
+      "owner": "managed",
+      "sha256": "9c6c506117667e185666ef63f6736a9068ec8db413f06fedd42b43960a705725"
+    },
+    "worker/wrangler.jsonc": {
+      "owner": "user"
+    }
+  }
+}
