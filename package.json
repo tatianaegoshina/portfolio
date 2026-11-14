@@ -12,11 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@lacecms/astro": "0.1.0-rc3",
-    "@lacecms/content": "0.1.0-rc3",
-    "@lacecms/render": "0.1.0-rc3",
-    "@lacecms/sdk": "0.1.0-rc3",
-    "astro": "^7.4.7",
+    "@lacecms/astro": "0.1.0-rc4",
+    "@lacecms/content": "0.1.0-rc4",
+    "@lacecms/render": "0.1.0-rc4",
+    "@lacecms/sdk": "0.1.0-rc4",
+    "astro": "^7.4.12",
     "sharp": "0.35.5"
   }
 }
