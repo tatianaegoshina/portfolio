@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "templateVersion": "0.48.0",
+  "templateVersion": "0.49.0",
   "site": {
     "mode": "existing",
     "path": ".."
@@ -8,7 +8,7 @@
   "files": {
     ".env.example": {
       "owner": "managed",
-      "sha256": "95959e995cde47cb2106f8495b973f89b1f8e5ad066115d9013e4cbff1e9d572"
+      "sha256": "81ee2a42fafb3eac9c2de32b3c2db88371a960d63ac2107f27df2a6991cccf01"
     },
     ".github/workflows/cloudflare.yml": {
       "owner": "managed",
@@ -39,19 +39,19 @@
     },
     "docs/lace-astro-site.md": {
       "owner": "managed",
-      "sha256": "d1a8c1e1399d0bbf65d3a8d0a39bb5b19a2848084f3cd65e068d5b28a3c8edbc"
+      "sha256": "b3429f34c3dc97fb617746a21b16ca60c3525001f50566e57caf6a2e8f659034"
     },
     "docs/lace-cloudflare.md": {
       "owner": "managed",
-      "sha256": "aa17853d7115c838a1b96afbdefd7c3ab76b0bd698a17044f24c0068b48e1900"
+      "sha256": "bbf7a00f731be192063d5e22a0bc4643e5ff5e133a4cc3dace4fd5bc3535eb5b"
     },
     "docs/lace-compose-dev.md": {
       "owner": "managed",
-      "sha256": "20844f6d8f681d2a2d2df7fd4a1ad43d0b3995a465a2ba6fbf8992210bff0a2a"
+      "sha256": "4b4c7d588321c947e79918f72bd783a7521e7446f31bc8e9f0a0354501c5e752"
     },
     "docs/lace-compose-production.md": {
       "owner": "managed",
-      "sha256": "6ec3a8983e5e314bddd5f1687c4117e8bade7a72cca03e11b1954c8c21560f05"
+      "sha256": "75f7eb53a5d2bdb598bdc732f3b5b6cf3ebdb6a1bcc46fc26f867e179ff9c3b3"
     },
     "docs/lace-mcp.md": {
       "owner": "managed",
@@ -59,14 +59,14 @@
     },
     "docs/lace-operations.md": {
       "owner": "managed",
-      "sha256": "1938a8812ef00d67a1d3bcdc32bfe76bdb4b80bb3d8506b9c5bade701de9edcf"
+      "sha256": "fa79969619de9ebc3a2321f0e86bcae90914e0eb8e86ae52cbbe9b3820a6c329"
     },
     "lace.config.ts": {
       "owner": "user"
     },
     "package.json": {
       "owner": "managed",
-      "sha256": "e4f735e8b5c6040df91db68c17219947b822d27dacb5fe05db8c8e150429c7b7"
+      "sha256": "34382a617f2c5eca4df8896a509cb869a3708df234179ca86a1c74eadf3ef681"
     },
     "pnpm-workspace.yaml": {
       "owner": "managed",
