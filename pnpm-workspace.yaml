@@ -1,10 +1,10 @@
 minimumReleaseAgeExclude:
-  - '@lacecms/astro@0.1.0-rc2 || 0.1.0-rc3'
-  - '@lacecms/content@0.1.0-rc2 || 0.1.0-rc3'
-  - '@lacecms/contracts@0.1.0-rc2 || 0.1.0-rc3'
-  - '@lacecms/domain@0.1.0-rc2 || 0.1.0-rc3'
-  - '@lacecms/render@0.1.0-rc2 || 0.1.0-rc3'
-  - '@lacecms/sdk@0.1.0-rc2 || 0.1.0-rc3'
+  - '@lacecms/astro@0.1.0-rc2 || 0.1.0-rc3 || 0.1.0-rc5'
+  - '@lacecms/content@0.1.0-rc2 || 0.1.0-rc3 || 0.1.0-rc5'
+  - '@lacecms/contracts@0.1.0-rc2 || 0.1.0-rc3 || 0.1.0-rc5'
+  - '@lacecms/domain@0.1.0-rc2 || 0.1.0-rc3 || 0.1.0-rc5'
+  - '@lacecms/render@0.1.0-rc2 || 0.1.0-rc3 || 0.1.0-rc5'
+  - '@lacecms/sdk@0.1.0-rc2 || 0.1.0-rc3 || 0.1.0-rc5'
   - '@astrojs/markdown-satteri@0.4.10'
   - '@astrojs/vite-plugin-astro@0.1.3'
   - astro@7.4.12

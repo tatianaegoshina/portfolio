@@ -10,12 +10,12 @@ The generated root `README.md` is a short index of requirements, layout and thes
 
 ## Prerequisites and generation
 
-Use Node `>=24.12.0`, pnpm `>=12` and Docker Compose. These are minimums: Lace is tested with Node `24.12.0` and the project-pinned pnpm `12.3.4`, and newer majors are eligible but unverified until the compatibility matrix records them. Obtain compatible Lace packages, generator and API/builder image tags from the same release. This project uses ownership template `0.49.0` and Lace `0.1.0-rc4` packages and images. Releases before rc2 are not supported, and an rc2 project upgrades as described in [Database baseline and upgrading from rc2](#database-baseline-and-upgrading-from-rc2). The npm prerelease channel is `next`; use the exact version below for reproducible generation. These coordinates become downloadable only after owner publication. Before publication, repository verification uses the exact locally prepared artifacts; ordinary consumers must wait for publication rather than patch dependency references.
+Use Node `>=24.12.0`, pnpm `>=12` and Docker Compose. These are minimums: Lace is tested with Node `24.12.0` and pnpm `12.3.4`, and newer majors are eligible but unverified until the compatibility matrix records them. Obtain compatible Lace packages, generator and API/builder image tags from the same release. This project uses ownership template `0.50.0` and Lace `0.1.0-rc5` packages and images. Releases before rc2 are not supported, and an rc2 project upgrades as described in [Database baseline and upgrading from rc2](#database-baseline-and-upgrading-from-rc2). The npm prerelease channel is `next`; use the exact version below for reproducible generation. These coordinates become downloadable only after owner publication. Before publication, repository verification uses the exact locally prepared artifacts; ordinary consumers must wait for publication rather than patch dependency references.
 
 After the owner publishes the complete compatible release set, generate and install:
 
 ```bash
-pnpm create lace@0.1.0-rc4 my-site
+pnpm create lace@0.1.0-rc5 my-site
 cd my-site
 pnpm install
 pnpm env:prepare
@@ -48,13 +48,14 @@ MinIO is built once from the pinned source in `deploy/minio.Dockerfile`, requiri
 
 Keep `LACE_BUILD_TOKEN` empty until setup finishes. Local API startup does not need it; starting the full builder requires a real read-only build token. Keep these settings aligned:
 
-| Setting                | Local host value           | Purpose                                                |
-| ---------------------- | -------------------------- | ------------------------------------------------------ |
-| `LACE_DATABASE_PATH`   | `./.lace/data/lace.sqlite` | CLI database shared with API `/data/lace.sqlite` mount |
-| `LACE_API_PORT`        | `3000`                     | Host API/admin port                                    |
-| `LACE_PUBLIC_BASE_URL` | `http://127.0.0.1:3000/`   | Browser API/admin origin and public media URLs         |
-| `LACE_API_BASE_URL`    | `http://127.0.0.1:3000/`   | Host Astro authenticated export transport              |
-| `LACE_HTTP_PORT`       | `8080`                     | Full Compose static-site/web port                      |
+| Setting                  | Local host value           | Purpose                                                |
+| ------------------------ | -------------------------- | ------------------------------------------------------ |
+| `LACE_DATABASE_PATH`     | `./.lace/data/lace.sqlite` | CLI database shared with API `/data/lace.sqlite` mount |
+| `LACE_API_PORT`          | `3000`                     | Development loopback API/admin port                    |
+| `LACE_PUBLIC_BASE_URL`   | `http://127.0.0.1:3000/`   | Browser API/admin origin and public media URLs         |
+| `LACE_API_BASE_URL`      | `http://127.0.0.1:3000/`   | Host Astro authenticated export transport              |
+| `LACE_HTTP_BIND_ADDRESS` | `127.0.0.1`                | Production Nginx host interface                        |
+| `LACE_HTTP_PORT`         | `8080`                     | Full Compose static-site/web port                      |
 
 If you change the API port, change both host URLs. Log in using the exact `LACE_PUBLIC_BASE_URL` origin; `localhost` and `127.0.0.1` differ. Compose overrides the builder export transport to `http://api:3000/`, while media retains the browser-facing URL. Intentional public base-path prefixes are preserved; your reverse proxy must route them.
 

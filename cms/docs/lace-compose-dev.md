@@ -10,9 +10,9 @@ Site mode: **existing site** at `..`. The generator did not modify the site; thi
 
 ## Prerequisites
 
-- Node `>=24.12.0` and pnpm `>=12` (tested baseline: Node `24.12.0`, the project-pinned pnpm `12.3.4`).
+- Node `>=24.12.0` and pnpm `>=12` (tested baseline: Node `24.12.0`, pnpm `12.3.4`).
 - Docker with Compose and a running daemon. MinIO's first image build needs network access and disk space.
-- Lace `0.1.0-rc4` or a later compatible release of the packages in `package.json` and the API/builder images in `.env.example`.
+- Lace `0.1.0-rc5` or a later compatible release of the packages in `package.json` and the API/builder images in `.env.example`.
 
 ## Install and prepare the environment
 
@@ -28,7 +28,7 @@ Preparation creates a protected, ignored `.env` with random auth, MinIO and buil
 Review `.env` before any command that loads it. Change only what your machine needs:
 
 - `LACE_API_IMAGE` and `LACE_BUILDER_IMAGE`: compatible image references for your Lace release.
-- `LACE_API_PORT` and `LACE_HTTP_PORT`: host ports for the API/admin and the static web proxy.
+- `LACE_API_PORT`: loopback API/admin port for development. `LACE_HTTP_PORT` and `LACE_HTTP_BIND_ADDRESS` configure the production web proxy.
 - `LACE_PUBLIC_BASE_URL` and `LACE_API_BASE_URL`: both default to `http://127.0.0.1:3000/`. Change both when you change the API port. Use the exact public origin for admin login (`localhost` and `127.0.0.1` differ). Keep path prefixes and the trailing slash.
 
 Keep every generated credential.

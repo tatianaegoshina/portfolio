@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@lacecms/astro':
-        specifier: 0.1.0-rc4
-        version: 0.1.0-rc4(astro@7.4.12(yaml@2.9.1))
+        specifier: 0.1.0-rc5
+        version: 0.1.0-rc5(astro@7.4.12(yaml@2.9.1))
       '@lacecms/content':
-        specifier: 0.1.0-rc4
-        version: 0.1.0-rc4
+        specifier: 0.1.0-rc5
+        version: 0.1.0-rc5
       '@lacecms/render':
-        specifier: 0.1.0-rc4
-        version: 0.1.0-rc4
+        specifier: 0.1.0-rc5
+        version: 0.1.0-rc5
       '@lacecms/sdk':
-        specifier: 0.1.0-rc4
-        version: 0.1.0-rc4
+        specifier: 0.1.0-rc5
+        version: 0.1.0-rc5
       astro:
         specifier: ^7.4.12
         version: 7.4.12(yaml@2.9.1)
@@ -393,30 +393,30 @@ packages:
   '@jridgewell/sourcemap-codec@1.6.0':
     resolution: {integrity: sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==}
 
-  '@lacecms/astro@0.1.0-rc4':
-    resolution: {integrity: sha512-8kMVbsU0UnhB4uhyZAUzoy5R4734oxerZtm5uMTmZvT6SkuRMDpv7O3PmxO7m2y9ZbTUfPNYKw5IOUPapL1+Pw==}
+  '@lacecms/astro@0.1.0-rc5':
+    resolution: {integrity: sha512-5EWqKBgMCjVGKa7aPPur03S/DgT/x7agKKZBGudJQNWPB/j13y+/0of6uyv2iFa0cp1nBgkbod7DPwLLr7ekjw==}
     engines: {node: '>=24.12.0'}
     peerDependencies:
       astro: ^7.3.1
 
-  '@lacecms/content@0.1.0-rc4':
-    resolution: {integrity: sha512-30cMyLcMSNyMYjsF4fKOKP1FgQDi5HMoabziFhXbW26vz5nTEmfpSya3cpw6w/vwuey1l/wNYL9n5zbij3eLFw==}
+  '@lacecms/content@0.1.0-rc5':
+    resolution: {integrity: sha512-zpAOzmmRuci8ncp6pUyE/6JM/BrToQH2to06At02CkIXAHnu88txpdJWa8e37puH/tWpw1wdzOX6d+tIvxADmw==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/contracts@0.1.0-rc4':
-    resolution: {integrity: sha512-TBKrtIzUpT5+1Uc67NL2akFZsjwKnOmLfPVsv9HtZNwY52Jk/PfUSiChyc3LZZIX0OwmGUdOmRDODyUToDV5/w==}
+  '@lacecms/contracts@0.1.0-rc5':
+    resolution: {integrity: sha512-IDD3/8Xwy7jjQswY7/YPQFvPXUZeD+0ZJsT97HmiTZmtydVZ2S0s266t4r9MOK2YjEYR8vlwpVbmqB3thCglkA==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/domain@0.1.0-rc4':
-    resolution: {integrity: sha512-98wn8VvwwFPJU8Us4bttla6EXmupMTyleMDM2Gs4gAsQFWhEL+Z7AohSP2PGRjxQQY3NWDIm4VdSdEUaxFcHvA==}
+  '@lacecms/domain@0.1.0-rc5':
+    resolution: {integrity: sha512-Ho3uqKg6qxbjD/vypsYtxWrsRytdoBlKaqq0xvYeFpYGjgYGyezqths3O/P2VI9S20mJ0EoeTE5ieHuTqUzO6g==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/render@0.1.0-rc4':
-    resolution: {integrity: sha512-Pd2AVYHzmPUeNMkJlWqHhIJ6Zj8GQptpL5tel8X+BkiKvW2DqJXk0z39PKVI9veLFwL8m0PAIvBLp2CASToE1A==}
+  '@lacecms/render@0.1.0-rc5':
+    resolution: {integrity: sha512-zjqkvcpfV1B0IOfZnGGj5wgReNBaI+whGrsd5rDAbAcIn5Vhz5Kjp2bSXrG1jKX4gB95QYA8rvGzb2dNJ3GTcQ==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/sdk@0.1.0-rc4':
-    resolution: {integrity: sha512-5PfWbg8EPtASXnIQDhbRV09V8UnKsvfqaTAKlLsJD9nFf2WyoI/Dn769imJSpkvxgilyNFZOOy5351pwSU4IbA==}
+  '@lacecms/sdk@0.1.0-rc5':
+    resolution: {integrity: sha512-Pa+xpKg+JpJUlyYNMQNf9/JESOrVKZLDqkex6h9msOuSYlvM2FCqkvkOXvci+8irsxloQYRa6wQhUjAECpld+w==}
     engines: {node: '>=24.12.0'}
 
   '@napi-rs/wasm-runtime@1.2.7':
@@ -1202,8 +1202,8 @@ packages:
       uploadthing:
         optional: true
 
-  valibot@1.4.2:
-    resolution: {integrity: sha512-gjdCvJ6d3RyHAneqxMYMW9QMCwYMb3jpOO0IyHZV1bnRHFBHrX3VkIILt5XYR0WhwHiH7Mty8ovuPZ/O3gamrg==}
+  valibot@1.5.0:
+    resolution: {integrity: sha512-nil6AkP2TChWL43Z5uJ6GTxX01CUA+g8LWUM+N/rB9NBbkUMaUsi9PUNzlUPgoKASgmx9f7eGOYpJ04/fSa6FQ==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -1595,44 +1595,44 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.6.0': {}
 
-  '@lacecms/astro@0.1.0-rc4(astro@7.4.12(yaml@2.9.1))':
+  '@lacecms/astro@0.1.0-rc5(astro@7.4.12(yaml@2.9.1))':
     dependencies:
-      '@lacecms/render': 0.1.0-rc4
-      '@lacecms/sdk': 0.1.0-rc4
+      '@lacecms/render': 0.1.0-rc5
+      '@lacecms/sdk': 0.1.0-rc5
       astro: 7.4.12(yaml@2.9.1)
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/content@0.1.0-rc4':
+  '@lacecms/content@0.1.0-rc5':
     dependencies:
-      valibot: 1.4.2
+      valibot: 1.5.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/contracts@0.1.0-rc4':
+  '@lacecms/contracts@0.1.0-rc5':
     dependencies:
-      '@lacecms/content': 0.1.0-rc4
-      '@lacecms/domain': 0.1.0-rc4
-      valibot: 1.4.2
+      '@lacecms/content': 0.1.0-rc5
+      '@lacecms/domain': 0.1.0-rc5
+      valibot: 1.5.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/domain@0.1.0-rc4':
+  '@lacecms/domain@0.1.0-rc5':
     dependencies:
-      '@lacecms/content': 0.1.0-rc4
+      '@lacecms/content': 0.1.0-rc5
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/render@0.1.0-rc4':
+  '@lacecms/render@0.1.0-rc5':
     dependencies:
-      '@lacecms/content': 0.1.0-rc4
+      '@lacecms/content': 0.1.0-rc5
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/sdk@0.1.0-rc4':
+  '@lacecms/sdk@0.1.0-rc5':
     dependencies:
-      '@lacecms/contracts': 0.1.0-rc4
-      valibot: 1.4.2
+      '@lacecms/contracts': 0.1.0-rc5
+      valibot: 1.5.0
     transitivePeerDependencies:
       - typescript
 
@@ -2420,7 +2420,7 @@ snapshots:
       ofetch: 1.5.1
       ufo: 1.6.4
 
-  valibot@1.4.2: {}
+  valibot@1.5.0: {}
 
   verkit@0.5.0: {}
 
