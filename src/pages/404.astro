@@ -1,14 +1,15 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Page not found</title>
-  </head>
-  <body>
-    <main>
-      <h1>Page not found</h1>
-      <a href="/">Return to the portfolio</a>
-    </main>
-  </body>
-</html>
+---
+import Layout from '../layouts/Layout.astro';
+import { getSite } from '../lace/site';
+import '../styles/portfolio-pages.css';
+
+const site = await getSite();
+const title = 'Page not found';
+---
+
+<Layout site={site} title={title}>
+  <div class="page-intro">
+    <h1 class="section-heading">{title}</h1>
+    <a href="/">Return to the portfolio</a>
+  </div>
+</Layout>

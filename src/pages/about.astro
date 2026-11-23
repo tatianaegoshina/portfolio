@@ -2,6 +2,7 @@
 import RichText from '@lacecms/astro/RichText.astro';
 import Layout from '../layouts/Layout.astro';
 import { firstYear, getSite, label, order } from '../lace/site';
+import '../styles/portfolio-pages.css';
 
 const site = await getSite();
 const about = site.byPath('/about');
@@ -16,7 +17,9 @@ const defaultHeadings = {
 };
 const headings = about.fields.sectionHeadings;
 const records = site.records('cv');
+const organizationFirstSections = new Set(['publications', 'teaching', 'talks']);
 const sections = Object.entries(defaultHeadings).map(([section, defaultHeading]) => ({
+  section,
   heading: headings && typeof headings === 'object' && !Array.isArray(headings)
     ? label(headings[section]) ?? defaultHeading
     : defaultHeading,
@@ -31,28 +34,44 @@ const sections = Object.entries(defaultHeadings).map(([section, defaultHeading])
 ---
 
 <Layout site={site} entry={about}>
-  <div class="intro">
-    <h1>{about.title}</h1>
-    {about.fields.intro != null && <RichText document={about.fields.intro} />}
+  <div class="about-page">
+    <h1 class="visually-hidden">{about.title}</h1>
+    {about.fields.intro != null && (
+      <div class="page-intro">
+        <RichText document={about.fields.intro} />
+      </div>
+    )}
+    {sections.filter(({ rows }) => rows.length > 0).map(({ section, heading, rows }) => (
+      <section class="portfolio-section" aria-labelledby={`cv-${section}`}>
+        <h2 class="section-heading" id={`cv-${section}`}>{heading}</h2>
+        <ul class="entry-list" role="list">
+          {rows.map((row) => {
+            const link = row.link(row.fields.url);
+            const href = link.state === 'resolved' ? link.href : undefined;
+            const Row = href ? 'a' : 'div';
+            const organization = label(row.fields.organization);
+            const organizationFirst = organization && organizationFirstSections.has(section);
+            const primary = organizationFirst ? organization : row.title;
+            const detail = organizationFirst ? row.title : organization;
+            const note = label(row.fields.note);
+            const details = [detail, note].filter(Boolean).join(note?.startsWith('(') ? ' ' : ' · ');
+
+            return (
+              <li>
+                <Row class="entry-row" href={href}>
+                  <span class="entry-year">{label(row.fields.year)}</span>
+                  <span class="entry-primary">
+                    {primary}{href && !details && <span aria-hidden="true"> ↗</span>}
+                  </span>
+                  {details && (
+                    <span class="entry-detail">{details}{href && <span aria-hidden="true"> ↗</span>}</span>
+                  )}
+                </Row>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
   </div>
-  {sections.filter(({ rows }) => rows.length > 0).map(({ heading, rows }) => (
-    <section>
-      <h2>{heading}</h2>
-      <ul class="entry-list">
-        {rows.map((row) => {
-          const link = row.link(row.fields.url);
-          const details = [label(row.fields.organization), label(row.fields.note)].filter(Boolean).join(' · ');
-          return (
-            <li>
-              <span>{label(row.fields.year)}</span>
-              <div>
-                {link.state === 'resolved' ? <a href={link.href}>{row.title} ↗</a> : row.title}
-                {details && <div>{details}</div>}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-  ))}
 </Layout>

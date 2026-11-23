@@ -1,0 +1,95 @@
+.site-layout {
+  --accent-color: #ff00a7;
+  --muted-accent-color: color-mix(in srgb, var(--accent-color) 40%, transparent);
+  --site-gutter: 1.25rem;
+  --site-column-gap: 1.25rem;
+  --site-content-gap: 2.5rem;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  margin: 0;
+  padding: var(--site-gutter);
+  background: #fff;
+  color: var(--accent-color);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.site-header,
+.site-footer {
+  display: grid;
+  gap: 0.625rem var(--site-column-gap);
+  align-items: baseline;
+  overflow-wrap: anywhere;
+}
+
+.site-name {
+  margin: 0;
+  font: inherit;
+}
+
+.site-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem var(--site-column-gap);
+}
+
+.site-main {
+  flex: 1;
+  min-inline-size: 0;
+  padding-block-start: var(--site-content-gap);
+}
+
+.site-footer {
+  margin-block-start: 3.75rem;
+}
+
+.site-layout a {
+  color: inherit;
+  text-underline-offset: 0.12em;
+}
+
+.site-header a {
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .site-header a:hover {
+    color: var(--muted-accent-color);
+  }
+}
+
+.site-layout a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (min-width: 50.625rem) {
+  .site-layout {
+    --site-content-gap: 1.875rem;
+    letter-spacing: -0.02em;
+  }
+
+  .site-header,
+  .site-footer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer-vat {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 75rem) {
+  .site-layout {
+    --site-content-gap: 2.5rem;
+    font-size: 1.375rem;
+  }
+}
