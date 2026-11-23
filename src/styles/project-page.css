@@ -3,7 +3,7 @@
 }
 
 .project-header {
-  border-block-end: 1px solid var(--muted-accent-color);
+  border-block-end: var(--entry-divider);
 }
 
 .project-description {

@@ -1,6 +1,7 @@
 .site-layout {
   --accent-color: #ff00a7;
   --muted-accent-color: color-mix(in srgb, var(--accent-color) 40%, transparent);
+  --entry-divider: 2px solid var(--muted-accent-color);
   --site-gutter: 1.25rem;
   --site-column-gap: 1.25rem;
   --site-content-gap: 2.5rem;
