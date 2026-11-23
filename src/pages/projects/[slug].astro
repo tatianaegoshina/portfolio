@@ -1,0 +1,31 @@
+---
+import LaceBlocks from '@lacecms/astro/LaceBlocks.astro';
+import RichText from '@lacecms/astro/RichText.astro';
+import { blocks } from '../../lace/blocks';
+import Layout from '../../layouts/Layout.astro';
+import { getSite, label, projectsInOrder } from '../../lace/site';
+
+export async function getStaticPaths() {
+  const site = await getSite();
+  return site.entries('projects').flatMap(({ slug }) => slug ? [{ params: { slug } }] : []);
+}
+
+const site = await getSite();
+const projects = projectsInOrder(site);
+const index = projects.findIndex(({ slug }) => slug === Astro.params.slug);
+const project = projects[index];
+if (!project) return new Response(null, { status: 404 });
+
+const next = projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
+const summary = label(project.fields.summary);
+---
+
+<Layout site={site} entry={project}>
+  <div class="intro">
+    <h1>{project.title}</h1>
+    <p>{[label(project.fields.year), summary].filter(Boolean).join(' · ')}</p>
+    {project.fields.body != null && <RichText document={project.fields.body} />}
+  </div>
+  <LaceBlocks blocks={blocks} entry={project} mediaUrl={site.mediaUrl} />
+  {next && <p><a href={next.path}>Next project · {next.title}</a></p>}
+</Layout>

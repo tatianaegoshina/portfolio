@@ -2,7 +2,9 @@
 
 Run the CMS as your own Cloudflare Worker (D1, R2 and the packaged admin): first locally without an account, then in your Cloudflare account through explicit commands.
 
-Cloudflare operator commands require the project's direct Miniflare dependency, pinned to the version used by Wrangler. If upgrading an existing Cloudflare project that lacks it, run `pnpm add miniflare@5.20260903.0-alpha` and install dependencies before running those commands.
+Cloudflare operator commands require the project's direct Miniflare dependency, pinned to the version used by Wrangler.
+
+For RC5, keep the existing D1 and R2 bindings. Quiesce writers and schedules, restore a D1 export and matching R2 backup to isolated targets, and follow the [RC5 upgrade procedure](lace-operations.md#upgrading-from-rc5).
 
 **Working directory:** the CMS installation root that contains `package.json`, `lace.config.ts` and `worker/` (for example `cms/`). Run every command from there.
 
@@ -14,8 +16,8 @@ Site mode: **existing site** at `..`. The generator did not modify it.
 
 ## Prerequisites
 
-- Node `>=24.12.0` and pnpm `>=12` (tested baseline: Node `24.12.0`, pnpm `12.3.4`). The project pins Wrangler in `package.json`; always use it through `pnpm exec wrangler`.
-- Lace `0.1.0-rc5` or a later compatible release. The private operator file, `--operator-env`, `lace cloudflare preflight` and Pages deployment tracking are included in this release.
+- Node `>=24.12.0` and pnpm `>=12` (see [tested versions](https://github.com/lacecms/lace/blob/main/docs/compatibility.md#minimum-requirements-and-tested-versions)). The project pins Wrangler in `package.json`; always use it through `pnpm exec wrangler`.
+- Lace `1.0.0` or a later compatible release. The private operator file, `--operator-env`, `lace cloudflare preflight` and Pages deployment tracking are included in this release.
 - For the account part only: a Cloudflare account with Workers, D1 and R2.
 
 ## Run the Worker locally
@@ -118,6 +120,63 @@ Either way, give the site build `LACE_BUILD_SITE_URL` (the Pages site URL, also 
 Pages sends `max-age=0` for every file unless the site's `public/_headers` says otherwise. The starter site ships one that caches the content-hashed `/_astro/` files (scripts, styles and image variants) for 30 days with `Cache-Control: public, max-age=2592000, immutable`; an existing site adds the same file (see [the site guide](lace-astro-site.md), section 12).
 
 Without tracking, a hook the provider accepts is recorded as **Accepted**, which never proves the site changed: confirm the deployment in Pages. With Pages deployment tracking (`LACE_PAGES_ACCOUNT_ID`, `LACE_PAGES_PROJECT_NAME` and the separate Pages-Read-only Worker secret `LACE_PAGES_API_TOKEN`), Builds follows that exact deployment to **Succeeded**, **Failed**, **Cancelled** or **Unknown** within the tracking deadline. Setup: [deploy the static site separately](lace-operations.md#deploy-the-static-site-separately) and the tracking entry in [recovery](lace-operations.md#recovery).
+
+## Prepare protected draft preview
+
+Preview is off by default. Configure the prerequisites before opting in
+on the deployed Worker. Apply the remote D1 migrations first.
+
+The existing Astro site is recorded as `..` relative to this CMS.
+Follow [Adopt protected draft preview](lace-astro-site.md#adopt-protected-draft-preview).
+Move or copy the generated `.github/workflows/lace-preview.yml` and
+`.github/scripts/lace-preview.mjs` to those paths at the site repository's
+Git root. Set `LACE_PREVIEW_SITE_PATH` relative to that root, for example
+`.` if Astro lives at the Git root or `web` for a workspace member.
+
+Commit the workflow to the default branch and the branch or tag configured
+for preview. Commit the lockfile and use the workflow's matching Lace builder
+image. Use regular source files without symlinks, submodules or LFS pointers.
+
+1. Create a private preview bucket with
+   `pnpm exec wrangler r2 bucket create <name>-preview --config worker/wrangler.jsonc`.
+   Append `{ "binding": "PREVIEW", "bucket_name": "<name>-preview" }` to
+   `r2_buckets`. Keep public bucket access off. Add `*/2 * * * *` to
+   `triggers.crons` alongside the current cron.
+2. Route a separate HTTPS custom hostname, such as `preview.example.com`,
+   to the same Worker. Bypass caching there. Add the commented preview vars
+   from `worker/wrangler.jsonc`, including bare HTTPS
+   `LACE_PREVIEW_ORIGIN=https://preview.example.com/` and a public
+   `LACE_BUILD_SITE_URL=https://site.example.com/journal/` using the actual
+   base path. Set the GitHub repository, ref, workflow filename and site path.
+3. Set the Worker secrets using
+   `pnpm exec wrangler secret put <NAME> --config worker/wrangler.jsonc`.
+   Store a repository-scoped token with Contents read and Actions read/write
+   as `LACE_PREVIEW_GITHUB_TOKEN`. Set a separate random
+   `LACE_PREVIEW_RUNNER_SECRET` in the Worker and GitHub Actions secrets.
+   Set the GitHub Actions variable `LACE_PREVIEW_API_ORIGIN` to the bare
+   HTTPS CMS origin. Keep secrets out of source, Wrangler vars, dispatch
+   inputs and the site subprocess environment.
+4. Set `"LACE_PREVIEW_ENABLED": "true"` in `worker/wrangler.jsonc` under
+   `vars`. Run remote `lace doctor --target cloudflare-remote --stage setup` with
+   the explicit operator environment and review the `preview` row. It checks
+   the local Wrangler file and installed site packages. Deploy the Worker
+   and confirm routing, private R2, secrets and the GitHub ref with an
+   authorized saved-draft build. Resource creation, registration, secret changes,
+   Git pushes and deployment are explicit operator actions.
+
+Preview consumes Actions capacity and Workers, D1 and R2 usage without
+creating a Pages deployment. Use the generation and recorded run ID to
+investigate quota, dispatch or storage failures. The overall deadline is
+15 minutes, including any provider wait, with up to 10 minutes for execution
+and upload. Ready output expires after 24 hours. After provider recovery,
+use **Retry preview** in Lace to build the current saved revision.
+
+To withdraw, close preview ingress, set `"LACE_PREVIEW_ENABLED": "false"`
+in Worker vars and redeploy. Confirm old viewer and runner requests are denied.
+Cancel any outstanding Actions run and confirm termination before re-enabling.
+Revoke dedicated credentials if old access must remain revoked. Use **Sign out everywhere** for affected
+accounts to revoke linked preview sessions. Remove private preview objects
+after delivery and execution stop. Preserve the media bucket and D1 backups.
 
 ## Repeat account operations
 

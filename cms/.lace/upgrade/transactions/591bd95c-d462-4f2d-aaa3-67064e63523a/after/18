@@ -1,0 +1,39 @@
+{
+  "name": "cms",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --dir .. exec astro dev",
+    "dev:api": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --remove-orphans minio minio-init migrate api",
+    "dev:api:preview": "docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.dev.preview.yml up -d --wait minio minio-init migrate api preview-builder preview-web",
+    "dev:stop": "docker compose down --remove-orphans",
+    "prod:start": "docker compose up -d",
+    "prod:stop": "docker compose down",
+    "build": "pnpm --dir .. exec astro build",
+    "env:prepare": "node node_modules/@lacecms/cli/dist/bin.js env prepare",
+    "db:migrate": "node --env-file=.env node_modules/@lacecms/cli/dist/bin.js db migrate",
+    "content:sync": "node --env-file=.env node_modules/@lacecms/cli/dist/bin.js content sync",
+    "auth:bootstrap": "node --env-file=.env node_modules/@lacecms/cli/dist/bin.js auth bootstrap",
+    "cf:env:prepare": "node node_modules/@lacecms/cli/dist/bin.js env prepare --target cloudflare-local",
+    "cf:db:migrate": "node --env-file=.env node_modules/@lacecms/cli/dist/bin.js db migrate --target cloudflare-local",
+    "cf:content:sync": "node --env-file=.env node_modules/@lacecms/cli/dist/bin.js content sync --target cloudflare-local",
+    "cf:auth:bootstrap": "node --env-file=.env node_modules/@lacecms/cli/dist/bin.js auth bootstrap --target cloudflare-local",
+    "cf:dev": "wrangler dev --config worker/wrangler.jsonc --local --persist-to .lace/data/cloudflare --ip 127.0.0.1 --port 8787 --test-scheduled --show-interactive-dev-session=false",
+    "cf:build": "cd worker && wrangler deploy --dry-run --outdir ../.lace/data/cloudflare-bundle"
+  },
+  "dependencies": {
+    "@lacecms/cli": "1.0.0",
+    "@lacecms/config": "1.0.0",
+    "@lacecms/content": "1.0.0",
+    "@lacecms/db": "1.0.0",
+    "@lacecms/platform-cloudflare": "1.0.0",
+    "miniflare": "5.20260903.0-alpha"
+  },
+  "devDependencies": {
+    "wrangler": "4.129.0"
+  },
+  "engines": {
+    "node": ">=24.12.0",
+    "pnpm": ">=12"
+  }
+}

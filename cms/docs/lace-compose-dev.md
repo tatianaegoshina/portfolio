@@ -1,6 +1,6 @@
 # Docker Compose development
 
-Run Lace on your own machine: the packaged API/admin and MinIO in Docker Compose, operator commands on the host.
+Run Lace on your own machine: the packaged API/admin and SILO in Docker Compose, operator commands on the host.
 
 **Working directory:** the CMS installation root that contains `package.json`, `lace.config.ts` and this `docs/` directory (for example `cms/`). Run every command from there.
 
@@ -10,9 +10,9 @@ Site mode: **existing site** at `..`. The generator did not modify the site; thi
 
 ## Prerequisites
 
-- Node `>=24.12.0` and pnpm `>=12` (tested baseline: Node `24.12.0`, pnpm `12.3.4`).
-- Docker with Compose and a running daemon. MinIO's first image build needs network access and disk space.
-- Lace `0.1.0-rc5` or a later compatible release of the packages in `package.json` and the API/builder images in `.env.example`.
+- Node `>=24.12.0` and pnpm `>=12` (see [tested versions](https://github.com/lacecms/lace/blob/main/docs/compatibility.md#minimum-requirements-and-tested-versions)).
+- Docker with Compose and a running daemon. A first SILO pull requires registry access or an existing local copy.
+- Lace `1.0.0` or a later compatible release of the packages in `package.json` and the API/builder images in `.env.example`.
 
 ## Install and prepare the environment
 
@@ -23,11 +23,12 @@ pnpm install
 pnpm env:prepare
 ```
 
-Preparation creates a protected, ignored `.env` with random auth, MinIO and builder credentials and an empty `LACE_BUILD_TOKEN`. It prints no secrets and refuses to overwrite an existing `.env`; keep and review an existing one instead. Never commit `.env`. Details and recovery: [environment preparation](lace-operations.md#prerequisites-and-generation).
+Preparation creates a protected, ignored `.env` with random auth, storage and builder credentials and an empty `LACE_BUILD_TOKEN`. It prints no secrets and refuses to overwrite an existing `.env`; keep and review an existing one instead. Never commit `.env`. Details and recovery: [environment preparation](lace-operations.md#prerequisites-and-generation).
 
 Review `.env` before any command that loads it. Change only what your machine needs:
 
 - `LACE_API_IMAGE` and `LACE_BUILDER_IMAGE`: compatible image references for your Lace release.
+- `LACE_MINIO_IMAGE`: optional full Compose image reference. Unset or empty uses the pinned classic SILO image. See [Switch the object storage image](lace-operations.md#switch-the-object-storage-image) before changing an existing installation.
 - `LACE_API_PORT`: loopback API/admin port for development. `LACE_HTTP_PORT` and `LACE_HTTP_BIND_ADDRESS` configure the production web proxy.
 - `LACE_PUBLIC_BASE_URL` and `LACE_API_BASE_URL`: both default to `http://127.0.0.1:3000/`. Change both when you change the API port. Use the exact public origin for admin login (`localhost` and `127.0.0.1` differ). Keep path prefixes and the trailing slash.
 
@@ -51,7 +52,7 @@ pnpm dev:api
 - Migration is explicit and creates `.lace/data/` when missing; the API never migrates on startup.
 - Sync registers Home and Posts and creates the Home draft.
 - Bootstrap prints one setup token that expires after one hour. Capture it privately.
-- `pnpm dev:api` starts MinIO, its initialization, the migration service and the API/admin. Wait until `/health/ready` at your API origin answers `ready`.
+- `pnpm dev:api` starts SILO, its private bucket initializer, the migration service and the API/admin. Wait until `/health/ready` at your API origin answers `ready`.
 
 ## Create the first administrator
 
@@ -103,6 +104,52 @@ pnpm build
 - `pnpm build` reads one authenticated published export and writes `../dist/`. Publication alone never changes that output or deploys it.
 - `pnpm exec lace doctor --target node --mode compose --stage setup` reports the `site` check as expected until packages and blocks are installed.
 
+## Enable protected draft preview
+
+Use a compatible API and builder image and apply the forward migrations.
+Commit the selected site and its pnpm lockfile in a clean Git checkout. The
+starter uses its project root; for an existing workspace set
+`LACE_BUILD_SOURCE_ROOT` to its Git and lockfile root and `LACE_BUILD_SITE_DIR`
+to its member directory. Existing sites must [adopt the Astro integration](lace-astro-site.md#adopt-protected-draft-preview).
+
+Resolve `cms.lace.test` and `preview.lace.test` to `127.0.0.1` with your local
+hosts file or resolver. Use [mkcert](https://github.com/FiloSottile/mkcert)
+to issue a locally trusted certificate for both names.
+
+```sh
+mkdir -p .lace/tls
+mkcert -install
+mkcert -cert-file .lace/tls/cert.pem -key-file .lace/tls/key.pem cms.lace.test preview.lace.test
+```
+
+1. In the ignored `.env`, set `LACE_PREVIEW_ENABLED=true` and independent
+   random `LACE_DEV_PREVIEW_BUILDER_SECRET` and `LACE_DEV_PREVIEW_RUNNER_SECRET`
+   values of at least 32 printable characters each. See `.env.example` for
+   optional DNS names, TLS port and certificate paths. Set
+   `LACE_DEV_PREVIEW_SITE_URL` if the public links in preview should point
+   somewhere other than the default local Astro site, `http://localhost:4321/`.
+2. Run the normal migration, sync and bootstrap steps while the services are
+   stopped. To target the HTTPS CMS from host commands or `pnpm dev`, use
+   `https://cms.lace.test:3443/` for `LACE_PUBLIC_BASE_URL` and
+   `LACE_API_BASE_URL`. For commands that fetch the HTTPS API, trust the local
+   CA in Node as well, for example with `NODE_EXTRA_CA_CERTS` pointing to its
+   public CA certificate.
+3. Start the variant with `pnpm dev:api:preview`. Open
+   `https://cms.lace.test:3443/admin/` and sign in. Save a routed draft and
+   choose **Create preview**. The new services share the existing SQLite
+   and SILO data. Only the TLS gateway binds to loopback. The builder uses
+   a read-only Git mount and private scratch space.
+
+If creation is unavailable, check the flag, distinct origins and credentials.
+`lace doctor` checks local files and packages; the signed-in build verifies
+the full path. Fix dirty source by committing it before retrying.
+
+Stop with `pnpm dev:stop`. To withdraw, set `LACE_PREVIEW_ENABLED=false`,
+restore your HTTP CMS and API URLs and run `pnpm dev:api`. This withdraws
+viewing and runner access and retains SQLite and SILO data. Resolve outstanding
+work before re-enabling. Revoke linked Lace sessions and rotate dedicated
+secrets if old access must remain revoked.
+
 ## Repeat and restart
 
 Daily start and stop:
@@ -112,7 +159,7 @@ pnpm dev:api
 pnpm dev:stop
 ```
 
-Stopping preserves `.lace/data/` and the MinIO volume. Restarting needs no migration, sync or bootstrap.
+Stopping preserves `.lace/data/` and the `minio-data` volume. Restarting needs no migration, sync or bootstrap.
 
 After editing `lace.config.ts`, or for any other host database command, stop the services first, run the command and start again:
 

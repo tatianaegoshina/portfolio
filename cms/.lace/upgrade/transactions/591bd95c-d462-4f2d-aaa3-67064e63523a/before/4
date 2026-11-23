@@ -1,0 +1,13 @@
+node_modules/
+.lace/data/
+dist/
+.astro/
+.env
+.lace-env-*/
+.env.*.local
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env.local
+.lace/cloudflare-operator.env

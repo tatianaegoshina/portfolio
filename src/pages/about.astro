@@ -1,0 +1,58 @@
+---
+import RichText from '@lacecms/astro/RichText.astro';
+import Layout from '../layouts/Layout.astro';
+import { firstYear, getSite, label, order } from '../lace/site';
+
+const site = await getSite();
+const about = site.byPath('/about');
+if (!about) throw new Error('Publish About in Lace Admin before building the site.');
+
+const defaultHeadings = {
+  publications: 'Interviews and publications',
+  exhibitions: 'Exhibitions',
+  teaching: 'Teaching',
+  talks: 'Public speaking engagements',
+  jury: 'Jury',
+};
+const headings = about.fields.sectionHeadings;
+const records = site.records('cv');
+const sections = Object.entries(defaultHeadings).map(([section, defaultHeading]) => ({
+  heading: headings && typeof headings === 'object' && !Array.isArray(headings)
+    ? label(headings[section]) ?? defaultHeading
+    : defaultHeading,
+  rows: records
+    .filter(({ fields }) => fields.section === section)
+    .sort((a, b) =>
+      firstYear(b.fields.year) - firstYear(a.fields.year) ||
+      order(a.fields.order) - order(b.fields.order) ||
+      a.title.localeCompare(b.title, 'en'),
+    ),
+}));
+---
+
+<Layout site={site} entry={about}>
+  <div class="intro">
+    <h1>{about.title}</h1>
+    {about.fields.intro != null && <RichText document={about.fields.intro} />}
+  </div>
+  {sections.filter(({ rows }) => rows.length > 0).map(({ heading, rows }) => (
+    <section>
+      <h2>{heading}</h2>
+      <ul class="entry-list">
+        {rows.map((row) => {
+          const link = row.link(row.fields.url);
+          const details = [label(row.fields.organization), label(row.fields.note)].filter(Boolean).join(' · ');
+          return (
+            <li>
+              <span>{label(row.fields.year)}</span>
+              <div>
+                {link.state === 'resolved' ? <a href={link.href}>{row.title} ↗</a> : row.title}
+                {details && <div>{details}</div>}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+</Layout>

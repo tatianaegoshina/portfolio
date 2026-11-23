@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "templateVersion": "0.50.0",
+  "templateVersion": "0.52.0",
   "site": {
     "mode": "existing",
     "path": ".."
@@ -8,34 +8,54 @@
   "files": {
     ".env.example": {
       "owner": "managed",
-      "sha256": "cca2c34ff9b0c227d3999adbbd369db0aabb2c81638caef2c9ee99ab9c9903bf"
+      "sha256": "075a43aea705781faf5204c787f6bf4ffa6282fbb07fb3cfde2c611b65d723b0"
+    },
+    ".github/scripts/lace-preview.mjs": {
+      "owner": "managed",
+      "sha256": "96df9f787e3287967df86d1168f6fa57af8fc0840419ef3d1adfbfba1ac9147d"
     },
     ".github/workflows/cloudflare.yml": {
       "owner": "managed",
-      "sha256": "e2bbb4f3dcaa00a028986f40f8417b6cb7e5a63d4f8fc14401c6f8c93db43d8b"
+      "sha256": "3a6cda994879520742a52e735379b4b5ad138df5061af8e5461f60726b3ec504"
+    },
+    ".github/workflows/lace-preview.yml": {
+      "owner": "managed",
+      "sha256": "451e9dfd2a23cf38d880d0bc1c2965934d1d83a50ae9b36618123992a7792000"
     },
     ".gitignore": {
       "owner": "managed",
-      "sha256": "66db9c5a089fa9b739c08f000d1d2898745150da8f3d3770c0e07be0d1712f1a"
+      "sha256": "62e24770c93e2f57b4770794aedb36ad1909336736dc1ec7808f3d4833e9e4a1"
     },
     "README.md": {
       "owner": "user"
     },
-    "deploy/minio.Dockerfile": {
+    "deploy/nginx-dev-preview.conf": {
       "owner": "managed",
-      "sha256": "14ec240a2a063cc7c9ad8a08bcc33089272180274a46ec17b3b711a098060eb0"
+      "sha256": "29b532da832b3a52b42f14a85ea890d67b88a2d5100404994411b953f3c56f7a"
+    },
+    "deploy/nginx-preview.conf": {
+      "owner": "managed",
+      "sha256": "6a8143f31d5b0d9b5e2e8caec850ca140116dc4e2310804ef4b4521faac429c8"
     },
     "deploy/nginx.conf": {
       "owner": "managed",
-      "sha256": "3279c17456cc0912afbb2fa63b557d169c7a5862bc7ff4534a27b14a7af5f692"
+      "sha256": "1fbe67c52ac3365ad85cd35c22a84aa10e80b372ca890114575c4a3c06395ed4"
+    },
+    "deploy/preview-ingress.sh": {
+      "owner": "managed",
+      "sha256": "ebae8441e8b79dca1f38bf7930b180d447082b3580fa9261bb29103e64cf6cdb"
+    },
+    "docker-compose.dev.preview.yml": {
+      "owner": "managed",
+      "sha256": "bcef6a8658cd34829f7611dd2642022bd2ae1a377753a7c0e69833f1b60ccf20"
     },
     "docker-compose.dev.yml": {
       "owner": "managed",
-      "sha256": "6afd233ddab29b3cd39ad7311c5496dc4cac86772d5115536a6b0f8b2629cef9"
+      "sha256": "2e46f30d3f0d461060ec4f90bfa9493059cf5b334b0a340402c49992bdb8232b"
     },
     "docker-compose.yml": {
       "owner": "managed",
-      "sha256": "6e02d4687383f04a9c3bbc3bf3242ef09de894c2b151f531e7f3f157e7575b22"
+      "sha256": "ee8b9fda9c5c2a97b262aabcc89d084897a006e9a9b35d3601dfed974159a76d"
     },
     "docs/cloudflare-operator.env.example": {
       "owner": "managed",
@@ -43,19 +63,19 @@
     },
     "docs/lace-astro-site.md": {
       "owner": "managed",
-      "sha256": "1041baa25bd684cdfd0a730e29a9bf67e7ba06429363abb9c17461c3939c8672"
+      "sha256": "07169c04b1ddf68520d9ba91e597bad2750f160954a10671882dd48b94e50809"
     },
     "docs/lace-cloudflare.md": {
       "owner": "managed",
-      "sha256": "7988a30fbe8bf4fedf20ada515d9cfdd8053ed8c60aa0561711958434c9f5d94"
+      "sha256": "96a753c13adec51ed50a4fd98fd26bd8a0627f717a74cac4e43d252b06f84c9f"
     },
     "docs/lace-compose-dev.md": {
       "owner": "managed",
-      "sha256": "002ef2eeb9094725776da1e14fab8e68541d41f95b720ca0564d8e3d740a11d8"
+      "sha256": "0830a9ca3f7e07708d047d09a057293a3b1e9abebf756c61568cf6866ec8d475"
     },
     "docs/lace-compose-production.md": {
       "owner": "managed",
-      "sha256": "d00b56983120cca6cdbe1a112fca289a55a2cb4868787c7323277bc7c514b715"
+      "sha256": "481bba2ec9bb8f9ce465c911945ee8b96839771877066b75eafb0ca74cdaa290"
     },
     "docs/lace-mcp.md": {
       "owner": "managed",
@@ -63,14 +83,14 @@
     },
     "docs/lace-operations.md": {
       "owner": "managed",
-      "sha256": "369bdf8263323125caabdf7afe98f1fb041334eee7d84f0656207c6dd75db9eb"
+      "sha256": "36d289d3a486ef0cd1cd7dad0426a885e4ff4159d195379dde287b1f86df5e1a"
     },
     "lace.config.ts": {
       "owner": "user"
     },
     "package.json": {
       "owner": "managed",
-      "sha256": "1b7e9638228a9f5e6f42b32102d01868573018dc31f9b9d98bb68722cb894b76"
+      "sha256": "ec7ccc67c3cb13b9db58a012c8c14c9b8675f15f633e40850b969056e7365696"
     },
     "pnpm-workspace.yaml": {
       "owner": "managed",

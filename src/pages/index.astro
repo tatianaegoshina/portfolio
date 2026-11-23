@@ -1,11 +1,45 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import RichText from '@lacecms/astro/RichText.astro';
+import type { PublishedEntry } from '@lacecms/sdk';
 import Layout from '../layouts/Layout.astro';
+import { firstYear, getSite, label, projectsInOrder } from '../lace/site';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const site = await getSite();
+const home = site.byPath('/');
+if (!home) throw new Error('Publish Home in Lace Admin before building the site.');
+
+const groups: { year: number; projects: PublishedEntry[] }[] = [];
+for (const project of projectsInOrder(site)) {
+  const year = firstYear(project.fields.year);
+  const group = groups.at(-1);
+  if (group?.year === year) {
+    group.projects.push(project);
+  } else {
+    groups.push({ year, projects: [project] });
+  }
+}
 ---
 
-<Layout>
-	<Welcome />
+<Layout site={site} entry={home}>
+  <div class="intro">
+    <h1>{label(site.global('settings')?.fields.siteName) ?? 'Tatiana Egoshina'}</h1>
+    {home.fields.intro != null && <RichText document={home.fields.intro} />}
+  </div>
+  <h2>{label(home.fields.projectsHeading) ?? 'Selected projects'}</h2>
+  {groups.map(({ year, projects }) => (
+    <section>
+      {year > 0 && <h3>{year}</h3>}
+      <ul class="entry-list">
+        {projects.map((project) => (
+          <li>
+            <span>{label(project.fields.year)}</span>
+            <div>
+              <a href={project.path}>{project.title}</a>
+              {label(project.fields.summary) && <div>{label(project.fields.summary)}</div>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </Layout>

@@ -1,0 +1,7 @@
+services:
+  api:
+    environment:
+      LACE_PREVIEW_ENABLED: "false"
+      LACE_PREVIEW_ORIGIN: https://${LACE_DEV_PREVIEW_HOST:-preview.lace.test}:${LACE_DEV_HTTPS_PORT:-3443}/
+    ports:
+      - "127.0.0.1:${LACE_API_PORT:-3000}:3000"

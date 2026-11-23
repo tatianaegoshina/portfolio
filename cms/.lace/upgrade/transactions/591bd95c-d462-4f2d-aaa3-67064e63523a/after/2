@@ -1,0 +1,49 @@
+name: Deploy site to Cloudflare Pages
+# Builds and deploys only the static Astro site. It never deploys, migrates or
+# configures the CMS Worker in worker/; see docs/lace-operations.md#cloudflare-worker.
+# Direct upload has no deploy hook: run this workflow after publishing, or connect
+# a Pages project to Git for hook-driven rebuilds.
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # GitHub reads workflows only from the repository root's .github/workflows. Move this
+    # file there and set the working directory to this CMS directory, relative to the
+    # repository root; the site at .. is installed and built from it.
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --dir .. install --frozen-lockfile
+      # Astro's image cache: variants and placeholders are reused between runs. A unique
+      # key saves a new snapshot; GitHub evicts snapshots unused for seven days.
+      - uses: actions/cache@v4
+        with:
+          path: "../node_modules/.astro"
+          key: lace-astro-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: lace-astro-${{ runner.os }}-
+      # LACE_API_BASE_URL reads the build export from the deployed CMS Worker origin;
+      # LACE_PUBLIC_BASE_URL is the Worker's public origin used in rendered media URLs.
+      # Optional: LACE_BUILD_SITE_URL (the Pages site URL) enables canonical URLs and
+      # sitemap.xml; LACE_SITE_INDEXING=off keeps a staging site out of search engines.
+      - run: pnpm build
+        env:
+          LACE_API_BASE_URL: ${{ vars.LACE_API_BASE_URL }}
+          LACE_PUBLIC_BASE_URL: ${{ vars.LACE_PUBLIC_BASE_URL }}
+          LACE_BUILD_TOKEN: ${{ secrets.LACE_BUILD_TOKEN }}
+          LACE_BUILD_SITE_URL: ${{ vars.LACE_BUILD_SITE_URL }}
+          LACE_SITE_INDEXING: ${{ vars.LACE_SITE_INDEXING }}
+      - run: pnpm exec wrangler pages deploy ../dist --project-name "${{ vars.CLOUDFLARE_PAGES_PROJECT }}"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

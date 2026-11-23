@@ -3,16 +3,15 @@
 // Content map:
 //   /                 page "home"        intro; projects listed by their `order`
 //   /about            page "about"       intro + section headings; rows from "cv"
-//   /projects/:slug   collection "projects"  header row, text, gallery blocks
+//   /projects/:slug   collection "projects"  header row, intro text, flexible blocks
 //   (no route)        collection "cv"    About rows without slugs or pages; the
 //                                        site lists them with site.records("cv")
 //   (no route)        global "settings"  site name, footer, accent, SEO defaults
 //   (no route)        global "navigation" header links: about, instagram, email
 //
-// Project media use the built-in `gallery` (install its source with
-// `lace add block gallery`). One `columns-2` gallery holds a whole project:
-// item `placement` puts an image in the left (`start`) or right (`end`)
-// column, or across the row (`full`) for wide videos.
+// Projects can combine text, standalone images and videos, and galleries.
+// In a `columns-2` gallery, item `placement` puts an image in the left (`start`)
+// or right (`end`) column, or across the row (`full`) for wide videos.
 import { defineCollection, defineConfig, defineGlobal, definePage } from "@lacecms/config";
 import { builtInBlocks, field } from "@lacecms/content";
 
@@ -92,7 +91,7 @@ export default await defineConfig({
     }),
     defineCollection({
       key: "projects",
-      version: 2,
+      version: 3,
       label: "Projects",
       route: "/projects/:slug",
       fields: {
@@ -136,7 +135,7 @@ export default await defineConfig({
         searchableFields: ["summary"],
         defaultSort: "field:order",
       },
-      blocks: ["gallery"],
+      blocks: ["gallery", "richText", "image", "videoEmbed"],
       seo: { description: "summary" },
     }),
     defineCollection({

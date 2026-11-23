@@ -1,7 +1,7 @@
 # Connect an existing Astro site
 
 Use this guide when your Astro site already exists and the Lace CMS lives in a
-subdirectory generated with `pnpm create lace@0.1.0-rc5 cms`. The CMS never
+subdirectory generated with `pnpm create lace@1.0.0 cms`. The CMS never
 modifies your site; every file below is yours. For build-site selection,
 mounts and the Compose builder, see
 [Selecting the build site](lace-operations.md#selecting-the-build-site).
@@ -22,7 +22,7 @@ my-site/                 your Astro project (lockfile root)
 Astro `^7.3.1` must already be a dependency. In the site root:
 
 ```sh
-pnpm add @lacecms/astro@0.1.0-rc5 @lacecms/render@0.1.0-rc5 @lacecms/sdk@0.1.0-rc5 @lacecms/content@0.1.0-rc5 sharp@0.35.5
+pnpm add @lacecms/astro@1.0.0 @lacecms/render@1.0.0 @lacecms/sdk@1.0.0 @lacecms/content@1.0.0 sharp@0.35.5
 ```
 
 `@lacecms/sdk` loads published content, `@lacecms/render` validates blocks and
@@ -185,20 +185,11 @@ add at least one item before publishing:
   figures. Each image uses `image(item.media, item.alt)`, so its alt text falls
   back to the media item's alt text and then to `""`; the caption falls back to
   the media caption. Images carry `width`, `height`, the focal-point
-  `object-position` and `loading="lazy"`. Video items render the player in
-  their cell, sized by `GalleryVideo.css`, with the same ambient, reduced-motion
+  `object-position` and `loading="lazy"`. The video cells use `LaceVideo.astro`
+  and are sized by `GalleryVideo.css`, with the same ambient, reduced-motion
   and no-JavaScript behavior as the Video embed block. Published items include
   only the fields of their kind, so a customized copy checks `item.kind` and
   that `item.media` is present before describing an image.
-- Upgrading from rc2 (template 0.47.0): raise the version of every model that
-  allows `gallery` and run `pnpm content:sync`. Migration 6 rewrites the
-  removed `featured-first` preset to `columns-2` with a `full` first item and
-  writes `playback: "player"` to video items that relied on the old default,
-  so stored galleries render as before. Before the next build, update the
-  component with `pnpm exec lace add block gallery --site site` or merge the
-  `.new` proposals (a revision 7 component fails with `block_version_mismatch`
-  after sync), and adopt the natural-size theme rules below; until then your
-  theme crops natural images.
 - `navigation` has an optional `name` (the `aria-label` of its `<nav>`; name
   every navigation when a page has several) and up to 20 `links`, each with a
   `label`, an optional `url` and up to 20 `children` (one submenu level). A
@@ -729,6 +720,38 @@ while pages keep revalidating. On Cloudflare Pages the starter site's
 A site that changes Astro's `build.assets` directory gets no long-lived
 caching: its assets keep revalidating.
 
+## Adopt protected draft preview
+
+The starter comes with the two integration points below. For an existing
+site, install Astro 7.4.12 or a later 7.4 patch and matching Lace packages.
+Use static directory output without an adapter, asset CDN prefix, i18n
+routing or incremental builds. Commit a reproducible pnpm lockfile.
+
+In `astro.config.*`, import `lacePreview` from `@lacecms/astro/preview` and
+append `lacePreview()` to your existing `integrations`. In the server-only
+loader from step 3, use `createAstroPreviewSiteLoader` from that subpath
+in place of `createAstroSiteLoader`, keeping its options. Read entries
+through the same loader in `getStaticPaths()` and in page frontmatter.
+This includes a saved draft with a new route. Fixed pages can use
+`site.byPath(Astro.url.pathname)`. Normal builds still read published content.
+
+Import assets through Astro. Literal local assets must be present in the
+package. Use `import.meta.env.BASE_URL` for runtime paths to packaged assets
+so they work below the generation prefix. Verify CSS, scripts, fonts, images
+and downloads. In-page fragment links stay local. Other site-page links
+open the public URL under its configured base path, for example `/journal/`.
+
+Check the server-only `(await getSite()).preview` flag before emitting
+analytics tags, form submission code and live embeds. You own those external
+side effects, plus any custom browser requests and build-time calls.
+Avoid service workers on the preview origin. Keep frozen input and runner
+credentials in the build process and out of browser-visible variables.
+An unsupported integration or missing route fails the preview.
+
+Follow the generated deployment guide for HTTPS, source selection, storage
+and credentials. A project with no site must first connect an Astro site.
+Preview setup in the CMS does not edit existing site files.
+
 ## 13. Build
 
 ```sh
@@ -795,22 +818,8 @@ image crop. Set `--lace-list-gap` (default 0) and `--lace-list-item-min` (14rem)
 Unlayered site rules override it; order theme layers after `lace-layout` otherwise.
 Vertical wrap needs an explicit site-defined height. Grid thresholds are container
 widths of 32/48/64rem; all six preset names are in the content-modeling guide.
-The `featured-first` preset was removed in template 0.49.0: a custom block that
-stored it declares a migration that sets `layoutPreset` to `columns-2` and its
-first item's `placement` to `full`, as Gallery's migration 6 does.
 Schematics explain composition, not site appearance. Default grid/auto preserves
 Gallery sizes; other modes use conservative `100vw`, tunable in your component.
-
-For a v3 upgrade, back up content and site first, upgrade compatible engine/admin/
-CLI/site packages, install the v4 renderer and companion with conflict review,
-remove old unlayered Gallery display/columns rules, keep 1rem spacing through
-`--lace-list-gap`, and preserve your image/theme rules. Increment model versions
-that structurally include Gallery; deploy matching definitions/renderer, then run
-normal `lace content sync`. Migration 4 preserves data, links, order, envelopes
-and lightbox and fills absent layout defaults (`grid`, true, `auto`); migrations
-2/3 remain. Interrupted sync resumes by rerunning. No new SQL migration is needed.
-After sync, rollback requires the pre-upgrade backup with matching older code;
-there is no automatic down-migration of v4 blocks.
 
 Layout visibility shows Wrap items only for flex and Grid preset only for grid.
 Inactive values remain stored and validated; a relevant validation error reveals
@@ -843,13 +852,14 @@ available without JavaScript or if embedding fails. Provider privacy/domain
 restrictions must permit the site. URL playback/tracking parameters are not
 forwarded; only a Vimeo privacy hash is retained.
 
-The renderer is site-owned. It is the sole built-in with a small local activation and ambient mounting
-script; there is no provider SDK or framework hydration. `VideoEmbed.css` reserves
-the selected responsive aspect ratio (16:9 by default) in `@layer lace-layout`; site CSS owns decoration. Hooks:
-`data-lace-part="preview|play|player|caption|source"` on the corresponding elements.
+Both `VideoEmbedBlock.astro` and `GalleryBlock.astro` use
+`@lacecms/astro/LaceVideo.astro` for player markup and local playback logic.
+The block sources and stylesheets belong to your site. `VideoEmbed.css` and
+`GalleryVideo.css` reserve the responsive aspect ratio in `@layer lace-layout`.
+Your CSS owns decoration. The player exposes `preview`, `play`, `player`,
+`caption` and `source` as `data-lace-part` hooks.
 `describeVideoEmbed` from `@lacecms/render` supplies canonical player data without
-network access. Source URLs are content strings; only posters use media storage.
-Video-file upload support is separate deferred work.
+network access. Source URLs are content strings and posters use media storage.
 
 Settings use choice cards: `aspectRatio` is `16:9` (default), `4:3`, `1:1`,
 `4:5` or `9:16`; `playback` is `player` (default) or `ambient`. For example,
@@ -873,39 +883,30 @@ Browsers may block autoplay (for example in low-power mode); the provider can
 show a still frame instead. Verify real playback with videos allowed on your domain.
 
 **Motion accessibility:** ambient ships without a pause control and does not meet
-WCAG 2.2.2 (Pause, Stop, Hide) for videos longer than five seconds. Prefer player
-mode when this requirement applies, or add a pause/stop control to your site-owned
-component. For example, place this button in the figure and add the handler to
-its local script; it stops the ambient player and restores the player fallback
-(restarting later starts from the beginning, rather than resuming):
+WCAG 2.2.2 (Pause, Stop, Hide) for videos longer than five seconds. Choose player
+mode when the requirement applies, or supply a site-owned renderer with a
+keyboard-accessible pause or stop control. Test any existing custom control when
+reviewing the new renderer.
 
-```html
-<button type="button" data-stop-ambient>Stop motion</button>
+### Adopt the shared player in an existing site
+
+For definitions already at `videoEmbed` version 2 or `gallery` version 6, use
+the matching CLI and site packages from `1.0.0`. Review the update, apply it
+and rebuild from the same published export:
+
+```sh
+pnpm exec lace add block videoEmbed gallery --site site --dry-run
+pnpm exec lace add block videoEmbed gallery --site site
 ```
 
-```js
-document.addEventListener("click", (event) => {
-  if (!(event.target instanceof Element)) return;
-  const control = event.target.closest("[data-stop-ambient]");
-  const block = control?.closest('[data-lace-ambient="active"]');
-  if (!block) return;
-  const area = block.querySelector("[data-lace-video-area]");
-  area.querySelector(":scope > iframe")?.remove();
-  const preview = area.querySelector('[data-lace-part="preview"]');
-  if (preview) preview.inert = false;
-  else area.append(area.querySelector("[data-lace-video-template]").content.cloneNode(true));
-  block.dataset.laceAmbient = "fallback";
-  block.querySelector('[data-lace-part="source"]').focus();
-  control.remove();
-});
-```
+Substitute your site path and name just one block if you want to update it
+independently. Review `.new` files if you edited the installed sources. This
+renderer update requires no model version bump or configuration sync.
 
-To adopt v2 in an existing project, raise every model version that allows
-`videoEmbed`, run configuration sync, then run `pnpm exec lace add block videoEmbed
---site site` before building (substitute your site path). Both component and CSS
-need registry revision 2. Use `--write-new` to review locally edited copies. An
-older component or stored block version can fail with `block_version_mismatch`.
-Template 0.40.0 includes these steps. No database migration is required.
+If your stored `videoEmbed` blocks are still at version 1, raise every model
+version that allows the block and synchronize with the built-in version 2
+definition before building. The build reports `block_version_mismatch` if the
+stored version differs from the site's block definition.
 
 For an optional manual playback smoke check, publish an owner-approved public
 YouTube video and a Vimeo video allowed on your domain, with and without a poster.
