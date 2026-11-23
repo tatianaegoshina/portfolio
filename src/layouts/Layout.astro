@@ -2,19 +2,22 @@
 import LaceSeo from '@lacecms/astro/LaceSeo.astro';
 import type { PublishedEntry, PublishedSite } from '@lacecms/sdk';
 import { label } from '../lace/site';
+import '../styles/layout.css';
 
-interface Props {
-  site: PublishedSite;
-  entry: PublishedEntry;
-}
+type Props = { site: PublishedSite; showFooter?: boolean } & (
+  | { entry: PublishedEntry; title?: never }
+  | { entry?: never; title: string }
+);
 
-const { site, entry } = Astro.props;
+const { site, entry, title, showFooter = true } = Astro.props;
 const settings = site.global('settings')?.fields;
 const navigation = site.global('navigation');
 const siteName = label(settings?.siteName) ?? 'Tatiana Egoshina';
+const isHome = entry?.path === '/';
+const SiteName = isHome ? 'h1' : 'div';
 const footerNote = label(settings?.footerNote);
 const vatNumber = label(settings?.vatNumber);
-const accent = [entry.fields.accentColor, settings?.accentColor].find(
+const accent = [entry?.fields.accentColor, settings?.accentColor].find(
   (value): value is string => typeof value === 'string' && /^#(?:[\da-f]{3}|[\da-f]{6})$/i.test(value),
 );
 const links = Array.isArray(navigation?.fields.links)
@@ -33,17 +36,21 @@ const links = Array.isArray(navigation?.fields.links)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <LaceSeo seo={site.seo(entry)} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {entry ? <LaceSeo seo={site.seo(entry)} /> : <title>{title}</title>}
   </head>
-  <body style={accent && `--accent: ${accent}`}>
+  <body class="site-layout" style={accent && { '--accent-color': accent }}>
     <header class="site-header">
-      <a class="site-name" href="/" aria-current={entry.path === '/' ? 'page' : undefined}>{siteName}</a>
+      <SiteName class="site-name">
+        <a href="/" aria-current={isHome ? 'page' : undefined}>{siteName}</a>
+      </SiteName>
       {links.length > 0 && (
-        <nav aria-label="Main">
+        <nav class="site-navigation" aria-label="Main">
           {links.map(({ href, text, newTab }) => (
             <a
               href={href}
-              aria-current={entry.path === href ? 'page' : undefined}
+              aria-current={entry?.path === href ? 'page' : undefined}
               target={newTab ? '_blank' : undefined}
               rel={newTab ? 'noopener noreferrer' : undefined}
             >{text}</a>
@@ -51,82 +58,14 @@ const links = Array.isArray(navigation?.fields.links)
         </nav>
       )}
     </header>
-    <main data-lace-model={entry.modelKey} data-lace-entry={entry.id}>
+    <main class="site-main" data-lace-model={entry?.modelKey} data-lace-entry={entry?.id}>
       <slot />
     </main>
-    {(footerNote || vatNumber) && (
+    {showFooter && (footerNote || vatNumber) && (
       <footer class="site-footer">
         {footerNote && <span>{footerNote}</span>}
-        {vatNumber && <span>Partita IVA {vatNumber}</span>}
+        {vatNumber && <span class="site-footer-vat">Partita IVA: {vatNumber}</span>}
       </footer>
     )}
   </body>
 </html>
-
-<style is:global>
-  :root {
-    font-family: Arial, sans-serif;
-    color: #161616;
-    background: #fff;
-  }
-  body {
-    --accent: #ff00a7;
-    margin: 0 auto;
-    max-width: 92rem;
-    padding: 0 clamp(1rem, 4vw, 4rem);
-    line-height: 1.5;
-  }
-  .site-header, .site-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.75rem 2rem;
-    padding-block: 1rem;
-    border-block-end: 1px solid var(--accent);
-  }
-  .site-header nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-  }
-  .site-name {
-    font-weight: bold;
-  }
-  .site-footer {
-    margin-top: 4rem;
-    border-block-start: 1px solid var(--accent);
-    border-block-end: 0;
-  }
-  main {
-    padding-top: clamp(1.5rem, 4vw, 4rem);
-  }
-  h1, h2 {
-    line-height: 1.1;
-  }
-  a {
-    color: inherit;
-    text-underline-offset: 0.2em;
-  }
-  a:hover {
-    text-decoration-color: var(--accent);
-  }
-  .intro {
-    max-width: 62ch;
-    margin-block-end: 3rem;
-  }
-  .entry-list {
-    padding: 0;
-    list-style: none;
-  }
-  .entry-list li {
-    display: grid;
-    grid-template-columns: minmax(5ch, 7ch) minmax(0, 1fr);
-    gap: 1rem;
-    padding-block: 0.65rem;
-    border-block-start: 1px solid var(--accent);
-  }
-  .entry-list li span {
-    overflow-wrap: anywhere;
-  }
-</style>

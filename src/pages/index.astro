@@ -3,6 +3,7 @@ import RichText from '@lacecms/astro/RichText.astro';
 import type { PublishedEntry } from '@lacecms/sdk';
 import Layout from '../layouts/Layout.astro';
 import { firstYear, getSite, label, projectsInOrder } from '../lace/site';
+import '../styles/portfolio-pages.css';
 
 const site = await getSite();
 const home = site.byPath('/');
@@ -21,25 +22,27 @@ for (const project of projectsInOrder(site)) {
 ---
 
 <Layout site={site} entry={home}>
-  <div class="intro">
-    <h1>{label(site.global('settings')?.fields.siteName) ?? 'Tatiana Egoshina'}</h1>
-    {home.fields.intro != null && <RichText document={home.fields.intro} />}
-  </div>
-  <h2>{label(home.fields.projectsHeading) ?? 'Selected projects'}</h2>
-  {groups.map(({ year, projects }) => (
-    <section>
-      {year > 0 && <h3>{year}</h3>}
-      <ul class="entry-list">
-        {projects.map((project) => (
-          <li>
-            <span>{label(project.fields.year)}</span>
-            <div>
-              <a href={project.path}>{project.title}</a>
-              {label(project.fields.summary) && <div>{label(project.fields.summary)}</div>}
-            </div>
-          </li>
-        ))}
-      </ul>
+  <div class="home-page">
+    {home.fields.intro != null && (
+      <div class="page-intro">
+        <RichText document={home.fields.intro} />
+      </div>
+    )}
+    <section class="portfolio-section" aria-labelledby="projects-heading">
+      <h2 class="section-heading" id="projects-heading">{label(home.fields.projectsHeading) ?? 'Selected projects'}</h2>
+      {groups.map(({ year, projects }) => (
+        <ul class="entry-list project-list" role="list" aria-label={year > 0 ? String(year) : undefined}>
+          {projects.map((project) => (
+            <li>
+              <a class="entry-row" href={project.path}>
+                <span class="entry-year">{label(project.fields.year)}</span>
+                <span class="entry-primary">{project.title}</span>
+                <span class="entry-detail project-summary">{label(project.fields.summary)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ))}
     </section>
-  ))}
+  </div>
 </Layout>

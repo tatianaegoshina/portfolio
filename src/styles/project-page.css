@@ -1,0 +1,62 @@
+.project-page {
+  padding-block: calc(3.75rem - var(--site-content-gap)) 2.5rem;
+}
+
+.project-header {
+  border-block-end: 1px solid var(--muted-accent-color);
+}
+
+.project-description {
+  margin-block: 1.25rem 3.75rem;
+}
+
+.project-page :where(figure) {
+  margin-inline: 0;
+}
+
+.project-page :where([data-lace-part='lightbox-trigger']) {
+  display: block;
+  max-inline-size: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.project-page :where(img[data-lace-part='media'], img[data-lace-part='lightbox-media']) {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+.next-project {
+  display: block;
+  margin-block-start: 3.75rem;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .next-project:hover {
+    color: var(--muted-accent-color);
+  }
+
+  .project-description a:hover {
+    text-decoration-line: none;
+  }
+}
+
+@media (width < 50.625rem) {
+  .project-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .project-header .entry-primary {
+    grid-area: 1 / 1;
+  }
+
+  .project-header .entry-year {
+    grid-area: 1 / 2;
+    max-inline-size: 6em;
+    text-align: end;
+  }
+}

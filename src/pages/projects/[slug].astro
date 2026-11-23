@@ -4,6 +4,8 @@ import RichText from '@lacecms/astro/RichText.astro';
 import { blocks } from '../../lace/blocks';
 import Layout from '../../layouts/Layout.astro';
 import { getSite, label, projectsInOrder } from '../../lace/site';
+import '../../styles/portfolio-pages.css';
+import '../../styles/project-page.css';
 
 export async function getStaticPaths() {
   const site = await getSite();
@@ -20,12 +22,19 @@ const next = projects.length > 1 ? projects[(index + 1) % projects.length] : und
 const summary = label(project.fields.summary);
 ---
 
-<Layout site={site} entry={project}>
-  <div class="intro">
-    <h1>{project.title}</h1>
-    <p>{[label(project.fields.year), summary].filter(Boolean).join(' · ')}</p>
-    {project.fields.body != null && <RichText document={project.fields.body} />}
-  </div>
-  <LaceBlocks blocks={blocks} entry={project} mediaUrl={site.mediaUrl} />
-  {next && <p><a href={next.path}>Next project · {next.title}</a></p>}
+<Layout site={site} entry={project} showFooter={false}>
+  <article class="project-page">
+    <header class="project-header entry-row">
+      <span class="entry-year">{label(project.fields.year)}</span>
+      <h1 class="entry-primary">{project.title}</h1>
+      {summary && <p class="entry-detail project-summary">{summary}</p>}
+    </header>
+    {project.fields.body != null && (
+      <div class="page-intro project-description">
+        <RichText document={project.fields.body} />
+      </div>
+    )}
+    <LaceBlocks blocks={blocks} entry={project} mediaUrl={site.mediaUrl} />
+    {next && <a class="next-project" href={next.path}>Next project: {next.title}</a>}
+  </article>
 </Layout>
