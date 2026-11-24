@@ -10,7 +10,7 @@ This README is an index. Every command sequence lives in the scenario guides bel
 
 - Node `>=24.12.0` and pnpm `>=12`. See the [tested versions](https://github.com/lacecms/lace/blob/main/docs/compatibility.md#minimum-requirements-and-tested-versions) for verified combinations.
 - Docker with Compose and a running daemon for the Compose scenarios. Compose pulls the pinned SILO image for object storage.
-- Lace packages and API/builder images from the same release, `1.0.0`, as pinned in `package.json` and `.env.example`.
+- Lace packages and API/builder images from the same release, `1.1.0`, as pinned in `package.json` and `.env.example`.
 
 ## Layout and ownership
 

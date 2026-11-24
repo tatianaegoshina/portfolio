@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "templateVersion": "0.52.0",
+  "templateVersion": "0.53.0",
   "site": {
     "mode": "existing",
     "path": ".."
@@ -8,7 +8,7 @@
   "files": {
     ".env.example": {
       "owner": "managed",
-      "sha256": "075a43aea705781faf5204c787f6bf4ffa6282fbb07fb3cfde2c611b65d723b0"
+      "sha256": "7cc81c86cbc9ff52a56a007a941fe15dfdb4c40b368bd6067f6237c5d17a92fa"
     },
     ".github/scripts/lace-preview.mjs": {
       "owner": "managed",
@@ -20,7 +20,7 @@
     },
     ".github/workflows/lace-preview.yml": {
       "owner": "managed",
-      "sha256": "451e9dfd2a23cf38d880d0bc1c2965934d1d83a50ae9b36618123992a7792000"
+      "sha256": "f85f583024a1a276ba35e9ec8d447725e9764121f90c1296bd104cb4fe1f09aa"
     },
     ".gitignore": {
       "owner": "managed",
@@ -63,19 +63,19 @@
     },
     "docs/lace-astro-site.md": {
       "owner": "managed",
-      "sha256": "07169c04b1ddf68520d9ba91e597bad2750f160954a10671882dd48b94e50809"
+      "sha256": "e60870d6e13721101103baf5a5794970d9415fc5c8bfcf1eaadfe380df7b7003"
     },
     "docs/lace-cloudflare.md": {
       "owner": "managed",
-      "sha256": "96a753c13adec51ed50a4fd98fd26bd8a0627f717a74cac4e43d252b06f84c9f"
+      "sha256": "91e7a33d805001d380fd4926222731e1f175fa390d22aeef06645a09f74705d5"
     },
     "docs/lace-compose-dev.md": {
       "owner": "managed",
-      "sha256": "0830a9ca3f7e07708d047d09a057293a3b1e9abebf756c61568cf6866ec8d475"
+      "sha256": "6fa5e2b2e935e1d1a7b26b018d3936c33651c9ce0396fc61b73c902812a1ccf9"
     },
     "docs/lace-compose-production.md": {
       "owner": "managed",
-      "sha256": "481bba2ec9bb8f9ce465c911945ee8b96839771877066b75eafb0ca74cdaa290"
+      "sha256": "769377db32d949d5c8e86b74a09c6efc5ce5f93cee93e715b30647c7ad12c87f"
     },
     "docs/lace-mcp.md": {
       "owner": "managed",
@@ -83,14 +83,14 @@
     },
     "docs/lace-operations.md": {
       "owner": "managed",
-      "sha256": "36d289d3a486ef0cd1cd7dad0426a885e4ff4159d195379dde287b1f86df5e1a"
+      "sha256": "436a8fe45a69c3148736fe39adc7c49f6c39073e414365f4f8026cc6de33f9b5"
     },
     "lace.config.ts": {
       "owner": "user"
     },
     "package.json": {
       "owner": "managed",
-      "sha256": "ec7ccc67c3cb13b9db58a012c8c14c9b8675f15f633e40850b969056e7365696"
+      "sha256": "a498cb3ac0dec5ac6de83a24bd3d6292ae890b9a177155f8747ac65de3078ba4"
     },
     "pnpm-workspace.yaml": {
       "owner": "managed",

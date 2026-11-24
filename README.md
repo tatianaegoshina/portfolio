@@ -32,6 +32,41 @@ pnpm --dir cms exec lace import ./import --url https://portfolio-cms.tategodi.wo
 unset LACE_IMPORT_TOKEN
 ```
 
+## Upgrade the CMS Worker to Lace 1.1.0
+
+Before deploying, pause writes and back up the existing `portfolio-cms` D1
+database and `portfolio-media` R2 bucket. See [Cloudflare backup and recovery](cms/docs/lace-operations.md#operator-observation-and-recovery).
+From the repository root, use the existing private
+`cms/.lace/cloudflare-operator.env` for D1 and Wrangler OAuth for the Worker.
+Keep `CLOUDFLARE_API_TOKEN` out of `cms/.env` and `cms/.env.local` so Wrangler
+uses the OAuth login. If Wrangler needs a fresh login, run
+`pnpm exec wrangler login` from `cms/` with the API token unset. Run the commands
+in order and stop if one fails.
+
+```sh
+cd cms
+pnpm install --frozen-lockfile
+unset CLOUDFLARE_API_TOKEN CF_API_TOKEN
+pnpm exec lace cloudflare preflight --target cloudflare-remote --wrangler-auth oauth --operator-env .lace/cloudflare-operator.env
+pnpm exec wrangler deployments list --config worker/wrangler.jsonc
+pnpm exec lace db migrate --target cloudflare-remote --operator-env .lace/cloudflare-operator.env
+pnpm exec lace content sync --target cloudflare-remote --operator-env .lace/cloudflare-operator.env
+pnpm exec wrangler deploy --config worker/wrangler.jsonc --keep-vars
+curl -fsS https://portfolio-cms.tategodi.workers.dev/health/ready
+```
+
+A fully migrated 1.0.0 database has zero new migrations. Wrangler needs
+the [Workers Editor role](https://developers.cloudflare.com/workers/authorization/workers/#wrangler)
+for `portfolio-cms`. If the list command returns `403`, check the signed-in
+account and its access to the Worker. A single API token for both operations
+needs D1 and Worker permissions. [Cloudflare credential options](cms/docs/lace-operations.md#choose-cloudflare-management-credentials)
+
+After deploying, sign in to Admin and open Media. The Worker's `IMAGES` binding
+generates missing thumbnails on demand and stores them in the existing private
+R2 bucket. [Media thumbnails](cms/docs/lace-cloudflare.md#enable-media-thumbnails)
+
+Once the Worker is ready, push the Astro update to `main` to trigger Cloudflare Pages.
+
 ## Cloudflare Pages
 
 In **Workers & Pages → Create application → Pages → Connect to Git**, select

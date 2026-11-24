@@ -110,20 +110,20 @@ importers:
   .:
     dependencies:
       '@lacecms/cli':
-        specifier: 1.0.0
-        version: 1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(miniflare@5.20260903.0-alpha)(zod@4.6.7)
+        specifier: 1.1.0
+        version: 1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(miniflare@5.20260903.0-alpha)(zod@4.6.7)
       '@lacecms/config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.0
+        version: 1.1.0
       '@lacecms/content':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.0
+        version: 1.1.0
       '@lacecms/db':
-        specifier: 1.0.0
-        version: 1.0.0(better-sqlite3@13.2.0)(kysely@0.29.8)
+        specifier: 1.1.0
+        version: 1.1.0(better-sqlite3@13.2.0)(kysely@0.29.8)
       '@lacecms/platform-cloudflare':
-        specifier: 1.0.0
-        version: 1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(zod@4.6.7)
+        specifier: 1.1.0
+        version: 1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(zod@4.6.7)
       miniflare:
         specifier: 5.20260903.0-alpha
         version: 5.20260903.0-alpha
@@ -833,16 +833,16 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@lacecms/application@1.0.0':
-    resolution: {integrity: sha512-B1c1s31WOFdpQvbLxXJ0KJcrjNzCCk810y0NkIavj0P3D2aQf5CaJ5QkNmMVkzS2Hm25yl6mNlxBXY+e44q7ZQ==}
+  '@lacecms/application@1.1.0':
+    resolution: {integrity: sha512-CnnL1972IrJeMJ4tVnWDNuB1Gaf0zhaAns6w/dqtSyqjIq+zbMIq9bsg6tPGIPW1JoGXahARNLbzSocOcZfC4A==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/auth@1.0.0':
-    resolution: {integrity: sha512-iaI4w+QKIxPpzKjfkH6GTvuVD4wy5jZOiWYX0ePMTnf0xcneZI/BH+jJ/azTg/vgqSBiPuC/X4wsSRbNQez6pw==}
+  '@lacecms/auth@1.1.0':
+    resolution: {integrity: sha512-xO4kxHvsRDoBx7YF+EmpTX6bjonSQb0Cv6s235OsXzVaWMQtPIV5ZUjTzpGMcN/LnPpOIVFvBieGK+9hzKqxWQ==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/cli@1.0.0':
-    resolution: {integrity: sha512-2tagLknCdL8yODWlDxWGjuQUhFJp3AYheNQLIHMp6bjEu6LNOB+aoapC6LRSEdWimGrWBCTNX8T+yMajAxsV6A==}
+  '@lacecms/cli@1.1.0':
+    resolution: {integrity: sha512-0DFqLQV85fvHpGVmoZEWWO/zXVUMgxTQ+687yV/5vequ3ZRA0HRvw174Lhk3TRz/OhqC/PAimdNbppvWWXzSPw==}
     engines: {node: '>=24.12.0'}
     hasBin: true
     peerDependencies:
@@ -851,40 +851,40 @@ packages:
       miniflare:
         optional: true
 
-  '@lacecms/config@1.0.0':
-    resolution: {integrity: sha512-Law0sa+h4Ynn9BuFbleSNiAJzpp0lSnjvA5koyRhxE/7s2ooNesv6OJiyxVfk3o21CWp2tQ3hlyRGOlLzMrXqQ==}
+  '@lacecms/config@1.1.0':
+    resolution: {integrity: sha512-lQptWaIVe78es/jct8LRKlSE0w4BmLQoH3YiPJXEI28pCVxkPuWhSWjORHKUi6DjGvfz58wYVCHnA7te7SBS0w==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/content@1.0.0':
-    resolution: {integrity: sha512-fAOyl2bS0xkfincDGKbNEXbPEUAlNi0M7TafUjlm6nQT1zAtyTV3oMHevHsW5mFckdXirevRB25w9/Y+kcuLHw==}
+  '@lacecms/content@1.1.0':
+    resolution: {integrity: sha512-mcp4IuMRZIMprA1feNt6gI9TwGsjDk/xq4zkOMLhzTE1LbzC/nFSsqAIOFHREAR1zTpJT4gRBlOkJTo5Lv4gPQ==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/contracts@1.0.0':
-    resolution: {integrity: sha512-QWeOU6ysK5M5SD7nO5z+Q+t0cvvdbiW7jm6hc2MdwmzpUFoUkInhWC0CCTGBKAbLW38KWspfPZ3khHwZu5MT1w==}
+  '@lacecms/contracts@1.1.0':
+    resolution: {integrity: sha512-Xoykji1ePvKNR/zLZ84GALRZnfy+chyGADVh0nRqnDsF0RUGq+wQF6zDfiFIcFlaaXi1wjc8WL5JbekuMilVRw==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/db@1.0.0':
-    resolution: {integrity: sha512-M/nl9PiBg4rKZyfGpVqOIH7fRpbSUEP6Y69vVMIaLW0wSe1WvdKuYsdBtiFWt02PsUAKea4UGY8fApoCn3xEWQ==}
+  '@lacecms/db@1.1.0':
+    resolution: {integrity: sha512-yDGQzn8JAkkJdFyPRNZ5RmMCCIB/8vZLlvaFE1BBoRplFzERp0MZDAC7qv5nvaGCAM9mJ40l6cJI8u/1GkFnZw==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/domain@1.0.0':
-    resolution: {integrity: sha512-K6CIhyiB4YvXRIb8g86Lfi7MFucN2iDGOaNhPS5L3ko0KIi9tiSfn+EMZ9rsL+ZaV90tMF4V84Q6Hv5qxhP+rw==}
+  '@lacecms/domain@1.1.0':
+    resolution: {integrity: sha512-iSFHHo/hgF/RfF0wHrrNogt4DcImeVKcgp+3DHRk/iCtoFR9joIbIxbawcBqwN5NbH1pZjct2+xY+1P4LJgcgQ==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/mcp@1.0.0':
-    resolution: {integrity: sha512-3rndiM7cF1RMkUjzuCOFabSj3BwxNiq+TFzXJqoGMVRZ2L5uz1OiZTnIV2QJd0F8avS+JD2OVxLa31/cxG29Pw==}
+  '@lacecms/mcp@1.1.0':
+    resolution: {integrity: sha512-3TkGuIzQzui1k9VUCZwq4w3H+CKuEyK2IJ47EOutjnpkyUxzvwtriuoWGObdIPfA2sb0D2Z6fLzTYG/s+JgPyw==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/platform-cloudflare@1.0.0':
-    resolution: {integrity: sha512-PWX+zdkalDsMVEd+F1iIRMKOw6X5K6N8zAOgDqlDYB/TvJX6z4WGGRvhAXXe//jJimCZdH/RqghSZSTkRB09Ug==}
+  '@lacecms/platform-cloudflare@1.1.0':
+    resolution: {integrity: sha512-8rGD3LJqOoZmUV1nbHk6I2IUCCzzswMH/w5hDbSSYvWHK2SwMFDo2GJjqzkfZjRW1yOoxqJCW6oiTMUBajPKfA==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/platform-node@1.0.0':
-    resolution: {integrity: sha512-z7kRXVyTz5xtoadw7jO9e5YD06fZ0u2N+zh27xs2YMOaSLQ5dv32RI3s9/R02Gvf3nS7L4GmqfZN56snUHpang==}
+  '@lacecms/platform-node@1.1.0':
+    resolution: {integrity: sha512-RDznfZ7F6CSlb7jqdq2UlKWovD/VmTOd6jqWLEWc2OpRyvKKpYPGB25JRkaaPYdvtxzec/ILUf1GkX++Ww3Siw==}
     engines: {node: '>=24.12.0'}
 
-  '@lacecms/server@1.0.0':
-    resolution: {integrity: sha512-xXK2rOZ/xfsZVaqjrxlaEQqVk04zq+KauJOlL5jVQveUNdy2ofya4o3yTcGYOFLDYlrGnDKZsTGZUGTXEUVXbA==}
+  '@lacecms/server@1.1.0':
+    resolution: {integrity: sha512-W8lCsL4e3wtGcNfsqelFigPZZWhP1bd5rL5g6ynyGcXEX7vsQ6RLuXGt6tF79y8RCTNzE9K6yjnJ7lRG4IX6sA==}
     engines: {node: '>=24.12.0'}
 
   '@mjackson/headers@0.11.1':
@@ -1968,20 +1968,20 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@lacecms/application@1.0.0':
+  '@lacecms/application@1.1.0':
     dependencies:
-      '@lacecms/config': 1.0.0
-      '@lacecms/content': 1.0.0
-      '@lacecms/contracts': 1.0.0
-      '@lacecms/domain': 1.0.0
+      '@lacecms/config': 1.1.0
+      '@lacecms/content': 1.1.0
+      '@lacecms/contracts': 1.1.0
+      '@lacecms/domain': 1.1.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/auth@1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)':
+  '@lacecms/auth@1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)':
     dependencies:
       '@better-auth/oauth-provider': 1.7.25(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-auth@1.7.25(drizzle-orm@0.45.2(@types/better-sqlite3@9.6.0)(better-sqlite3@13.2.0)(kysely@0.29.8)))(better-call@1.4.5(zod@4.6.7))
-      '@lacecms/application': 1.0.0
-      '@lacecms/domain': 1.0.0
+      '@lacecms/application': 1.1.0
+      '@lacecms/domain': 1.1.0
       better-auth: 1.7.25(drizzle-orm@0.45.2(@types/better-sqlite3@9.6.0)(better-sqlite3@13.2.0)(kysely@0.29.8))
       drizzle-orm: 0.45.2(@types/better-sqlite3@9.6.0)(better-sqlite3@13.2.0)(kysely@0.29.8)
     transitivePeerDependencies:
@@ -2033,13 +2033,13 @@ snapshots:
       - vitest
       - vue
 
-  '@lacecms/cli@1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(miniflare@5.20260903.0-alpha)(zod@4.6.7)':
+  '@lacecms/cli@1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(miniflare@5.20260903.0-alpha)(zod@4.6.7)':
     dependencies:
-      '@lacecms/application': 1.0.0
-      '@lacecms/config': 1.0.0
-      '@lacecms/contracts': 1.0.0
-      '@lacecms/platform-cloudflare': 1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(zod@4.6.7)
-      '@lacecms/platform-node': 1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(better-call@1.4.5(zod@4.6.7))(kysely@0.29.8)(zod@4.6.7)
+      '@lacecms/application': 1.1.0
+      '@lacecms/config': 1.1.0
+      '@lacecms/contracts': 1.1.0
+      '@lacecms/platform-cloudflare': 1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(zod@4.6.7)
+      '@lacecms/platform-node': 1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(better-call@1.4.5(zod@4.6.7))(kysely@0.29.8)(zod@4.6.7)
       semver: 7.8.5
       valibot: 1.5.0
     optionalDependencies:
@@ -2101,33 +2101,33 @@ snapshots:
       - zod-openapi
       - zod-to-json-schema
 
-  '@lacecms/config@1.0.0':
+  '@lacecms/config@1.1.0':
     dependencies:
-      '@lacecms/content': 1.0.0
+      '@lacecms/content': 1.1.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/content@1.0.0':
+  '@lacecms/content@1.1.0':
     dependencies:
       emoji-regex: 11.0.0
       valibot: 1.5.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/contracts@1.0.0':
+  '@lacecms/contracts@1.1.0':
     dependencies:
-      '@lacecms/content': 1.0.0
-      '@lacecms/domain': 1.0.0
+      '@lacecms/content': 1.1.0
+      '@lacecms/domain': 1.1.0
       valibot: 1.5.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/db@1.0.0(better-sqlite3@13.2.0)(kysely@0.29.8)':
+  '@lacecms/db@1.1.0(better-sqlite3@13.2.0)(kysely@0.29.8)':
     dependencies:
-      '@lacecms/application': 1.0.0
-      '@lacecms/content': 1.0.0
-      '@lacecms/contracts': 1.0.0
-      '@lacecms/domain': 1.0.0
+      '@lacecms/application': 1.1.0
+      '@lacecms/content': 1.1.0
+      '@lacecms/contracts': 1.1.0
+      '@lacecms/domain': 1.1.0
       '@types/better-sqlite3': 9.6.0
       drizzle-orm: 0.45.2(@types/better-sqlite3@9.6.0)(better-sqlite3@13.2.0)(kysely@0.29.8)
     transitivePeerDependencies:
@@ -2161,33 +2161,33 @@ snapshots:
       - sqlite3
       - typescript
 
-  '@lacecms/domain@1.0.0':
+  '@lacecms/domain@1.1.0':
     dependencies:
-      '@lacecms/content': 1.0.0
+      '@lacecms/content': 1.1.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/mcp@1.0.0':
+  '@lacecms/mcp@1.1.0':
     dependencies:
-      '@lacecms/application': 1.0.0
-      '@lacecms/contracts': 1.0.0
-      '@lacecms/domain': 1.0.0
+      '@lacecms/application': 1.1.0
+      '@lacecms/contracts': 1.1.0
+      '@lacecms/domain': 1.1.0
       '@modelcontextprotocol/server': 2.4.0
       '@valibot/to-json-schema': 1.8.0(valibot@1.5.0)
       valibot: 1.5.0
     transitivePeerDependencies:
       - typescript
 
-  '@lacecms/platform-cloudflare@1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(zod@4.6.7)':
+  '@lacecms/platform-cloudflare@1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)(zod@4.6.7)':
     dependencies:
-      '@lacecms/application': 1.0.0
-      '@lacecms/auth': 1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)
-      '@lacecms/config': 1.0.0
-      '@lacecms/content': 1.0.0
-      '@lacecms/db': 1.0.0(better-sqlite3@13.2.0)(kysely@0.29.8)
-      '@lacecms/domain': 1.0.0
-      '@lacecms/mcp': 1.0.0
-      '@lacecms/server': 1.0.0(@standard-schema/spec@1.1.0)(zod@4.6.7)
+      '@lacecms/application': 1.1.0
+      '@lacecms/auth': 1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)
+      '@lacecms/config': 1.1.0
+      '@lacecms/content': 1.1.0
+      '@lacecms/db': 1.1.0(better-sqlite3@13.2.0)(kysely@0.29.8)
+      '@lacecms/domain': 1.1.0
+      '@lacecms/mcp': 1.1.0
+      '@lacecms/server': 1.1.0(@standard-schema/spec@1.1.0)(zod@4.6.7)
       better-auth: 1.7.25(drizzle-orm@0.45.2(@types/better-sqlite3@9.6.0)(better-sqlite3@13.2.0)(kysely@0.29.8))
       drizzle-orm: 0.45.2(@types/better-sqlite3@9.6.0)(better-sqlite3@13.2.0)(kysely@0.29.8)
       ulid: 3.0.2
@@ -2248,17 +2248,17 @@ snapshots:
       - zod-openapi
       - zod-to-json-schema
 
-  '@lacecms/platform-node@1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(better-call@1.4.5(zod@4.6.7))(kysely@0.29.8)(zod@4.6.7)':
+  '@lacecms/platform-node@1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@standard-schema/spec@1.1.0)(better-call@1.4.5(zod@4.6.7))(kysely@0.29.8)(zod@4.6.7)':
     dependencies:
       '@aws-sdk/client-s3': 3.1164.0
-      '@lacecms/application': 1.0.0
-      '@lacecms/auth': 1.0.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)
-      '@lacecms/config': 1.0.0
-      '@lacecms/content': 1.0.0
-      '@lacecms/db': 1.0.0(better-sqlite3@13.2.0)(kysely@0.29.8)
-      '@lacecms/domain': 1.0.0
-      '@lacecms/mcp': 1.0.0
-      '@lacecms/server': 1.0.0(@standard-schema/spec@1.1.0)(zod@4.6.7)
+      '@lacecms/application': 1.1.0
+      '@lacecms/auth': 1.1.0(@better-auth/core@1.7.25(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@types/better-sqlite3@9.6.0)(better-call@1.4.5(zod@4.6.7))(better-sqlite3@13.2.0)(kysely@0.29.8)
+      '@lacecms/config': 1.1.0
+      '@lacecms/content': 1.1.0
+      '@lacecms/db': 1.1.0(better-sqlite3@13.2.0)(kysely@0.29.8)
+      '@lacecms/domain': 1.1.0
+      '@lacecms/mcp': 1.1.0
+      '@lacecms/server': 1.1.0(@standard-schema/spec@1.1.0)(zod@4.6.7)
       '@types/better-sqlite3': 9.6.0
       '@types/node': 24.10.1
       better-sqlite3: 13.2.0
@@ -2321,11 +2321,11 @@ snapshots:
       - zod-openapi
       - zod-to-json-schema
 
-  '@lacecms/server@1.0.0(@standard-schema/spec@1.1.0)(zod@4.6.7)':
+  '@lacecms/server@1.1.0(@standard-schema/spec@1.1.0)(zod@4.6.7)':
     dependencies:
       '@hono/standard-validator': 0.4.0(@standard-schema/spec@1.1.0)(hono@4.13.18)
-      '@lacecms/application': 1.0.0
-      '@lacecms/contracts': 1.0.0
+      '@lacecms/application': 1.1.0
+      '@lacecms/contracts': 1.1.0
       '@mjackson/multipart-parser': 0.10.1
       '@scalar/hono-api-reference': 0.12.13(hono@4.13.18)
       '@valibot/to-json-schema': 1.8.0(valibot@1.5.0)

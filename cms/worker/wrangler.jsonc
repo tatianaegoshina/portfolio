@@ -23,6 +23,8 @@
   ],
   // Create with `pnpm exec wrangler r2 bucket create cms-media`.
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "portfolio-media" }],
+  // Generate missing media thumbnails on demand and cache them in MEDIA.
+  "images": { "binding": "IMAGES" },
   // Optional derived cache. Without a CACHE binding the Worker uses a no-op cache.
   // To enable it, create a namespace with `pnpm exec wrangler kv namespace create CACHE`
   // and add: "kv_namespaces": [{ "binding": "CACHE", "id": "<namespace-id>" }],
